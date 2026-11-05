@@ -59,7 +59,6 @@
           <p class="eyebrow">年度数据概览</p>
           <h2 id="stats-title">营销节奏，一页掌握</h2>
         </div>
-        <span class="data-freshness" id="data-freshness">正在读取数据库…</span>
       </div>
       <div class="stats-grid">
         <article class="stat-card">
@@ -128,6 +127,37 @@
         </div>
       </div>
 
+      <div class="calendar-meta">
+        <div class="calendar-meta-dates">
+          <span class="calendar-meta-item">数据库最近核验：<strong id="data-freshness">正在读取数据库…</strong></span>
+          <span class="calendar-meta-item calendar-today">今天是：<strong id="today-date">—</strong></span>
+        </div>
+        <button class="data-note-toggle" id="data-note-toggle" type="button" aria-expanded="false" aria-controls="data-note-panel">
+          数据说明
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+      </div>
+
+      <div class="data-note-panel" id="data-note-panel" hidden>
+        <div class="data-note-grid">
+          <article class="data-note-block">
+            <h3>数据覆盖市场</h3>
+            <p>美国、加拿大、英国、德国、法国、意大利、西班牙、澳大利亚、爱尔兰及全球主要营销节点。</p>
+          </article>
+          <article class="data-note-block">
+            <h3>数据来源与核验机制</h3>
+            <ul>
+              <li>节日日期参考对应国家官方机构及权威来源。</li>
+              <li>固定日期节日根据固定日期规则计算。</li>
+              <li>浮动日期节日根据对应日期规则计算。</li>
+              <li>商业营销节点以品牌或平台官方公告为准。</li>
+              <li>官方尚未公布的日期不会擅自预测为已确认日期。</li>
+            </ul>
+          </article>
+        </div>
+        <p class="data-note-student">本日历用于独立站节日营销规划参考。固定节日和按规则计算的节日会根据对应日期规则更新；涉及官方临时公布或可能调整的商业营销节点，请以官方最新公告为准。数据库核验日期代表最近一次实际完成的数据核验时间，并非网页自动更新时间。</p>
+      </div>
+
       <div id="month-view" role="tabpanel" aria-labelledby="months-tab">
         <div class="month-grid" id="month-grid" aria-live="polite"></div>
       </div>
@@ -138,7 +168,7 @@
       <div class="status-guide" aria-label="日期状态说明">
         <span class="guide-title">日期状态</span>
         <span><i class="legend-dot confirmed"></i>官方已确认</span>
-        <span><i class="legend-dot calculated"></i>根据规则计算</span>
+        <span><i class="legend-dot calculated"></i>按规则计算</span>
         <span><i class="legend-dot unconfirmed"></i>官方尚未公布</span>
         <span><i class="legend-dot manual"></i>待人工核实</span>
       </div>

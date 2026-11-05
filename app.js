@@ -17,7 +17,7 @@ const MONTHS = [
 
 const DATE_STATUS = {
   official_confirmed: "官方已确认",
-  rule_calculated: "根据规则计算",
+  rule_calculated: "按规则计算",
   official_unconfirmed: "官方尚未公布",
   manual_verification: "待人工核实"
 };
@@ -174,6 +174,7 @@ async function init() {
   cacheDom();
   populateYears();
   populateMatcherForm();
+  renderTodayDate();
   bindEvents();
   loadPlansFromStorage();
   await Promise.all([loadDatabase(), loadStrategyData()]);
@@ -192,7 +193,8 @@ function handlePlanKeydownBound(event) {
 
 function cacheDom() {
   [
-    "year-select", "panel-year", "upcoming-list", "data-freshness", "stat-total",
+    "year-select", "panel-year", "upcoming-list", "data-freshness", "today-date", "stat-total",
+    "data-note-toggle", "data-note-panel",
     "stat-current", "stat-current-label", "stat-upcoming", "stat-upcoming-note",
     "stat-priority", "month-grid", "month-view", "timeline-view", "timeline",
     "holiday-search", "reset-filters", "active-filter", "active-filter-label",
@@ -228,6 +230,15 @@ function populateYears() {
   dom.panelYear.textContent = state.year;
 }
 
+function formatIsoDate(date) {
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+}
+
+// 系统当前日期仅用于展示，不参与数据库核验字段的计算或写入
+function renderTodayDate() {
+  if (dom.todayDate) dom.todayDate.textContent = formatIsoDate(TODAY);
+}
+
 function bindEvents() {
   dom.yearSelect.addEventListener("change", event => {
     state.year = Number(event.target.value);
@@ -236,6 +247,12 @@ function bindEvents() {
     renderPlanList();
     updateDataStatus();
     showToast(`已切换至 ${state.year} 年，日期与倒计时已重新计算`);
+  });
+
+  dom.dataNoteToggle?.addEventListener("click", () => {
+    const expanded = dom.dataNoteToggle.getAttribute("aria-expanded") === "true";
+    dom.dataNoteToggle.setAttribute("aria-expanded", String(!expanded));
+    dom.dataNotePanel.hidden = expanded;
   });
 
   document.querySelectorAll("[data-view]").forEach(button => {
@@ -345,7 +362,7 @@ async function loadDatabase() {
     populateFilterOptions();
     calculateAndRender();
     if (state.strategyData) dom.generateMatches.disabled = false;
-    dom.dataFreshness.textContent = `数据库核验至 ${data.meta.last_verified}`;
+    dom.dataFreshness.textContent = data.meta.database_last_verified || data.meta.last_verified;
     dom.databaseCount.textContent = `${data.holidays.length} 个节点 · 独立 JSON`;
   } catch (error) {
     showLoadError(error);
@@ -779,8 +796,12 @@ function renderMonths() {
     const marketingFallback = events.filter(event => event.priority === "high" && !marketing.includes(event));
     const campaigns = [...marketing, ...marketingFallback].sort(compareByPriority).slice(0, 2);
     const active = state.selectedMonth === monthNumber ? " active" : "";
-    const festivalText = festivals.length ? festivals.map(event => event.name_cn).join("、") : "以季节营销为主";
-    const campaignText = campaigns.length ? campaigns.map(event => event.name_cn).join("、") : "见本月完整节点";
+    const festivalItems = festivals.length
+      ? festivals.map(event => `<span class="month-event"><span class="month-event-name">${escapeHTML(event.name_cn)}</span><span class="status-chip status-${event.status}">${DATE_STATUS[event.status]}</span></span>`).join("")
+      : `<span class="month-event is-empty">以季节营销为主</span>`;
+    const campaignItems = campaigns.length
+      ? campaigns.map(event => `<span class="month-event"><span class="month-event-name">${escapeHTML(event.name_cn)}</span><span class="status-chip status-${event.status}">${DATE_STATUS[event.status]}</span></span>`).join("")
+      : `<span class="month-event is-empty">见本月完整节点</span>`;
 
     return `
       <button class="month-card${active}" type="button" data-month="${monthNumber}" style="--month-color:${month.color}" aria-label="查看${month.cn}${events.length}个营销节点">
@@ -790,11 +811,11 @@ function renderMonths() {
         </span>
         <span class="month-block">
           <span class="month-block-label">主要节日</span>
-          <p>${escapeHTML(festivalText)}</p>
+          <span class="month-block-list">${festivalItems}</span>
         </span>
         <span class="month-block">
           <span class="month-block-label">重点营销活动</span>
-          <p>${escapeHTML(campaignText)}</p>
+          <span class="month-block-list">${campaignItems}</span>
         </span>
         <span class="month-card-footer"><span>查看本月全部节点</span><span aria-hidden="true">→</span></span>
       </button>`;
@@ -813,6 +834,7 @@ function renderTimeline() {
             <button class="timeline-event" type="button" data-event-id="${escapeHTML(event.id)}" aria-label="查看${escapeHTML(event.name_cn)}详情">
               <span class="timeline-date">${formatTimelineDate(event)}</span>
               <span class="timeline-name"><strong>${escapeHTML(event.name_cn)}</strong><span>${escapeHTML(event.name_en)}</span></span>
+              <span class="status-chip status-${event.status}">${DATE_STATUS[event.status]}</span>
               <span class="timeline-arrow" aria-hidden="true">→</span>
             </button>`).join("") : `<p class="section-description">本月暂无节点</p>`}
         </div>
@@ -987,6 +1009,7 @@ function renderHolidayItem(event) {
         <span class="holiday-country">${escapeHTML(event.country.join(" · "))}</span>
         <span class="holiday-badges">
           <span class="badge badge-priority badge-priority-${event.priority}">${PRIORITY[event.priority]}</span>
+          <span class="badge badge-status-${event.status}">${DATE_STATUS[event.status]}</span>
           ${planningBadge}
         </span>
         <span class="holiday-card-arrow" aria-hidden="true">→</span>
@@ -1039,10 +1062,12 @@ function openDetails(id, trigger) {
     <section class="drawer-section" aria-labelledby="drawer-source-title">
       <h3 id="drawer-source-title">日期核实与信息来源</h3>
       <dl class="drawer-verification">
-        <div><dt>日期核实状态</dt><dd><span class="badge badge-status-${event.status}">${DATE_STATUS[event.status]}</span>${event.planning_window ? `<span class="badge badge-planning">建议窗口</span>` : ""}</dd></div>
+        <div><dt>日期状态</dt><dd><span class="badge badge-status-${event.status}">${DATE_STATUS[event.status]}</span>${event.planning_window ? `<span class="badge badge-planning">建议窗口</span>` : ""}${event.needs_manual_review ? `<span class="badge badge-review">需人工复核</span>` : ""}</dd></div>
         <div><dt>日期规则</dt><dd>${escapeHTML(describeDateRule(event))}</dd></div>
+        <div><dt>最近核验日期</dt><dd>${escapeHTML(event.last_verified)}</dd></div>
+        <div><dt>来源名称</dt><dd>${event.source_name ? escapeHTML(event.source_name) : "数据库未记录"}</dd></div>
         <div><dt>信息来源</dt><dd><a class="source-link" href="${escapeHTML(event.source_url)}" target="_blank" rel="noopener noreferrer">查看原始来源 ↗</a><small class="source-url">${escapeHTML(event.source_url)}</small></dd></div>
-        <div><dt>最后核实时间</dt><dd>${escapeHTML(event.last_verified)}</dd></div>
+        ${event.verification_note ? `<div><dt>核验说明</dt><dd>${escapeHTML(event.verification_note)}</dd></div>` : ""}
       </dl>
       ${dateNote}
     </section>`;
