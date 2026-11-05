@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="面向独立站运营者的欧美全年节日营销日历，覆盖12个月营销节点、国家差异、动态日期和权威来源。">
+  <meta name="theme-color" content="#142a26">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23142a26'/%3E%3Cpath d='M18 16v8M46 16v8M14 28h36M18 14h28a4 4 0 0 1 4 4v32H14V18a4 4 0 0 1 4-4Z' fill='none' stroke='%23d9f99d' stroke-width='4'/%3E%3C/svg%3E">
+  <title>欧美全年节日营销日历</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <p class="member-note"><strong>付费会员专享</strong><span class="header-divider" aria-hidden="true">｜</span><span>带教咨询微信 <span class="wechat">ch022427</span></span></p>
+      <span class="header-tag"><span class="status-dot" aria-hidden="true"></span>全年营销规划工具</span>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow light"><span class="eyebrow-line" aria-hidden="true"></span>GLOBAL COMMERCE CALENDAR</p>
+          <h1>欧美全年节日<br class="desktop-break">营销日历</h1>
+          <p class="hero-subtitle">掌握欧美全年营销节点，让你的独立站不错过每一次销售机会。</p>
+          <div class="hero-actions">
+            <a class="button button-accent" href="#calendar">查看全年节点<span aria-hidden="true">→</span></a>
+            <a class="button button-ghost" href="#holiday-details">浏览节日数据库</a>
+          </div>
+          <div class="hero-meta">
+            <span><span class="meta-check" aria-hidden="true">✓</span> 12个月完整覆盖</span>
+            <span><span class="meta-check" aria-hidden="true">✓</span> 日期按年份动态计算</span>
+            <span><span class="meta-check" aria-hidden="true">✓</span> 数据独立存储</span>
+          </div>
+        </div>
+
+        <aside class="upcoming-panel" aria-label="近期营销节点">
+          <div class="panel-topline">
+            <span class="panel-label">接下来值得关注</span>
+            <span class="panel-year" id="panel-year">—</span>
+          </div>
+          <div id="upcoming-list" class="upcoming-list" aria-live="polite">
+            <div class="upcoming-loading"></div>
+            <div class="upcoming-loading"></div>
+            <div class="upcoming-loading"></div>
+          </div>
+          <p class="panel-note">基于当前日期与所选年份动态展示</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="stats-section container" aria-labelledby="stats-title">
+      <div class="section-heading stats-heading">
+        <div>
+          <p class="eyebrow">年度数据概览</p>
+          <h2 id="stats-title">营销节奏，一页掌握</h2>
+        </div>
+        <span class="data-freshness" id="data-freshness">正在读取数据库…</span>
+      </div>
+      <div class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-icon icon-green" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M7 3v3M17 3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z"/></svg>
+          </div>
+          <div class="stat-content">
+            <p>全年节日及营销节点</p>
+            <strong id="stat-total">—</strong>
+            <span id="stat-total-note">独立数据库节点</span>
+          </div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon icon-orange" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 7v5l3 2M21 12a9 9 0 1 1-9-9 9 9 0 0 1 9 9Z"/></svg>
+          </div>
+          <div class="stat-content">
+            <p id="stat-current-label">当前月份节点</p>
+            <strong id="stat-current">—</strong>
+            <span>按实际开始月份统计</span>
+          </div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon icon-blue" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6M4 4h16M4 20h16"/></svg>
+          </div>
+          <div class="stat-content">
+            <p>未来30天营销节点</p>
+            <strong id="stat-upcoming">—</strong>
+            <span id="stat-upcoming-note">含进行中的活动</span>
+          </div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon icon-red" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></svg>
+          </div>
+          <div class="stat-content">
+            <p>高优先级营销节点</p>
+            <strong id="stat-priority">—</strong>
+            <span>建议提前规划与备货</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="calendar-section container" id="calendar" aria-labelledby="calendar-title">
+      <div class="section-heading calendar-heading">
+        <div>
+          <p class="eyebrow">全年规划</p>
+          <h2 id="calendar-title">12个月营销节奏</h2>
+          <p class="section-description">点击月份查看完整节点，或切换时间轴掌握全年先后关系。</p>
+        </div>
+        <div class="calendar-controls">
+          <label class="year-control" for="year-select">
+            <span>规划年份</span>
+            <select id="year-select" aria-label="选择规划年份"></select>
+          </label>
+          <div class="view-switch" role="tablist" aria-label="日历视图">
+            <button class="view-button active" id="months-tab" type="button" role="tab" aria-selected="true" aria-controls="month-view" data-view="months">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg>月份视图
+            </button>
+            <button class="view-button" id="timeline-tab" type="button" role="tab" aria-selected="false" aria-controls="timeline-view" data-view="timeline" tabindex="-1">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>时间轴视图
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="month-view" role="tabpanel" aria-labelledby="months-tab">
+        <div class="month-grid" id="month-grid" aria-live="polite"></div>
+      </div>
+      <div id="timeline-view" role="tabpanel" aria-labelledby="timeline-tab" hidden>
+        <div class="timeline" id="timeline"></div>
+      </div>
+
+      <div class="status-guide" aria-label="日期状态说明">
+        <span class="guide-title">日期状态</span>
+        <span><i class="legend-dot confirmed"></i>官方已确认</span>
+        <span><i class="legend-dot calculated"></i>根据规则计算</span>
+        <span><i class="legend-dot unconfirmed"></i>官方尚未公布</span>
+        <span><i class="legend-dot manual"></i>待人工核实</span>
+      </div>
+    </section>
+
+    <section class="details-section" id="holiday-details" aria-labelledby="details-title">
+      <div class="container">
+        <div class="section-heading details-heading">
+          <div>
+            <p class="eyebrow">节日数据库</p>
+            <h2 id="details-title">节日基础信息</h2>
+            <p class="section-description">组合筛选目标节点，点击卡片查看背景、购买动机、营销机会与信息来源。</p>
+          </div>
+          <div class="database-badge"><span class="status-dot" aria-hidden="true"></span><span id="database-count">JSON 数据库</span></div>
+        </div>
+
+        <div class="notice" role="note">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8v5M12 17h.01M12 3 2.8 20h18.4L12 3Z"/></svg>
+          <p><strong>日期使用说明：</strong>带“建议窗口”标记的区间为营销规划参考，并非官方统一活动日期；“官方尚未公布”和“待人工核实”的节点不会展示推测日期。重要活动请在执行前复核来源。</p>
+        </div>
+
+        <div class="filter-panel" id="filter-panel" aria-label="节日筛选">
+          <div class="active-filter" id="active-filter" hidden>
+            <span id="active-filter-label"></span>
+            <button type="button" id="clear-month" aria-label="清除月份筛选">×</button>
+          </div>
+          <label class="search-field" for="holiday-search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.4-4.4M19 11a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"/></svg>
+            <input id="holiday-search" type="search" placeholder="搜索中英文节日、产品、国家或营销关键词" autocomplete="off">
+          </label>
+          <button class="reset-button" id="reset-filters" type="button">清除全部筛选</button>
+
+          <div class="filter-dropdown" data-filter-dropdown="countries">
+            <button class="filter-trigger" type="button" data-filter-trigger="countries" aria-expanded="false" aria-controls="country-options">
+              <span class="filter-trigger-label">国家／市场</span><span class="filter-trigger-value" data-filter-value="countries">全部市场</span><span class="filter-chevron" aria-hidden="true">⌄</span>
+            </button>
+            <div class="filter-options" id="country-options" data-filter-menu="countries" hidden></div>
+          </div>
+          <div class="filter-dropdown" data-filter-dropdown="products">
+            <button class="filter-trigger" type="button" data-filter-trigger="products" aria-expanded="false" aria-controls="product-options">
+              <span class="filter-trigger-label">产品类别</span><span class="filter-trigger-value" data-filter-value="products">全部产品</span><span class="filter-chevron" aria-hidden="true">⌄</span>
+            </button>
+            <div class="filter-options" id="product-options" data-filter-menu="products" hidden></div>
+          </div>
+          <div class="filter-dropdown" data-filter-dropdown="priorities">
+            <button class="filter-trigger" type="button" data-filter-trigger="priorities" aria-expanded="false" aria-controls="priority-options">
+              <span class="filter-trigger-label">营销优先级</span><span class="filter-trigger-value" data-filter-value="priorities">全部优先级</span><span class="filter-chevron" aria-hidden="true">⌄</span>
+            </button>
+            <div class="filter-options" id="priority-options" data-filter-menu="priorities" hidden></div>
+          </div>
+          <div class="filter-dropdown" data-filter-dropdown="types">
+            <button class="filter-trigger" type="button" data-filter-trigger="types" aria-expanded="false" aria-controls="type-options">
+              <span class="filter-trigger-label">营销类型</span><span class="filter-trigger-value" data-filter-value="types">全部类型</span><span class="filter-chevron" aria-hidden="true">⌄</span>
+            </button>
+            <div class="filter-options" id="type-options" data-filter-menu="types" hidden></div>
+          </div>
+        </div>
+
+        <div class="results-bar">
+          <p id="result-count" aria-live="polite">正在加载节点…</p>
+          <span id="filter-result-hint">点击卡片查看完整详情</span>
+        </div>
+        <div class="holiday-list" id="holiday-list"></div>
+        <div class="empty-state" id="empty-state" hidden>
+          <div class="empty-icon" aria-hidden="true">0</div>
+          <h3>没有找到匹配节点</h3>
+          <p>试试减少筛选条件，或查看全年完整数据库。</p>
+          <button class="button button-dark" id="empty-reset" type="button">查看全部节点</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="matcher-section" id="product-matcher" aria-labelledby="matcher-title">
+      <div class="container">
+        <div class="section-heading matcher-heading">
+          <div>
+            <p class="eyebrow light"><span class="eyebrow-line" aria-hidden="true"></span>PRODUCT OPPORTUNITY MATCHER</p>
+            <h2 id="matcher-title">我的产品营销匹配</h2>
+            <p class="section-description">输入产品信息，从产品属性、销售国家和节日消费场景中筛选真正值得参与的全年节点。</p>
+          </div>
+          <span class="matcher-data-badge">策略内容独立 JSON 管理</span>
+        </div>
+
+        <div class="matcher-panel">
+          <form class="match-form" id="match-form" novalidate>
+            <div class="match-form-grid">
+              <label class="match-field" for="match-category">
+                <span>产品类别 <b aria-hidden="true">*</b></span>
+                <select id="match-category" required>
+                  <option value="">请选择产品类别</option>
+                </select>
+              </label>
+              <label class="match-field" for="match-product-name">
+                <span>产品名称 <small>选填</small></span>
+                <input id="match-product-name" type="text" maxlength="80" placeholder="例如 Botanical Flower Earrings">
+              </label>
+              <label class="match-field" for="match-price">
+                <span>产品价格区间 <small>选填</small></span>
+                <select id="match-price">
+                  <option value="">请选择价格区间</option>
+                </select>
+              </label>
+              <label class="match-field match-field-features" for="match-features">
+                <span>产品特点 <small>选填</small></span>
+                <textarea id="match-features" rows="3" maxlength="300" placeholder="例如：花朵造型、手工制作、纯银材质、可定制礼盒"></textarea>
+              </label>
+            </div>
+
+            <fieldset class="match-countries">
+              <legend>销售国家 <b aria-hidden="true">*</b><small>可多选</small></legend>
+              <div class="match-country-grid" id="match-country-options"></div>
+            </fieldset>
+
+            <p class="match-form-error" id="match-form-error" role="alert" hidden></p>
+            <div class="match-submit-row">
+              <button class="button button-accent match-submit" id="generate-matches" type="submit" disabled>生成我的全年营销机会<span aria-hidden="true">→</span></button>
+              <p id="strategy-load-status" role="status">正在加载营销策略库…</p>
+            </div>
+          </form>
+
+          <aside class="matcher-method" aria-label="产品匹配依据">
+            <p class="eyebrow light">MATCHING LOGIC</p>
+            <h3>不是把全年节日，无差别推给你。</h3>
+            <ol>
+              <li><span>01</span><div><strong>产品属性</strong><p>分析产品分类、原始产品标签与礼赠属性。</p></div></li>
+              <li><span>02</span><div><strong>国家适用性</strong><p>区分国家专属节点与真正适用的全球节点。</p></div></li>
+              <li><span>03</span><div><strong>消费场景</strong><p>结合购买动机、营销类型与节点优先级评分。</p></div></li>
+            </ol>
+            <p class="matcher-method-note">最多精选 12 个高相关机会；不展示推测日期，不提供统一广告预算。</p>
+          </aside>
+        </div>
+
+        <div class="match-results" id="match-results" hidden>
+          <div class="match-results-heading">
+            <div>
+              <p class="eyebrow">YOUR OPPORTUNITIES</p>
+              <h3 id="match-results-title">我的全年营销机会</h3>
+              <p id="match-summary"></p>
+            </div>
+            <span class="match-year" id="match-year"></span>
+          </div>
+          <div class="match-list" id="match-list"></div>
+          <div class="match-empty" id="match-empty" hidden>
+            <h4>暂未找到足够相关的营销节点</h4>
+            <p id="match-empty-detail">请增加销售国家，或补充更明确的产品特点后重新生成。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="plan-section" id="marketing-plan" aria-labelledby="plan-title">
+      <div class="container">
+        <div class="section-heading plan-heading">
+          <div>
+            <p class="eyebrow light"><span class="eyebrow-line" aria-hidden="true"></span>MARKETING PLAN</p>
+            <h2 id="plan-title">我的营销计划</h2>
+            <p class="section-description">把推荐节点加入个人营销计划，按阶段跟进准备任务，直到活动结束复盘。</p>
+          </div>
+          <button class="button button-accent plan-new-button" id="plan-new-button" type="button">+ 新建营销计划</button>
+        </div>
+
+        <div class="plan-stats" id="plan-stats">
+          <div class="plan-stat-card"><strong id="stat-plan-count">0</strong><span>营销计划总数</span></div>
+          <div class="plan-stat-card"><strong id="stat-plan-active">0</strong><span>正在执行的活动</span></div>
+          <div class="plan-stat-card"><strong id="stat-plan-done">0</strong><span>已完成活动</span></div>
+          <div class="plan-stat-card stat-progress">
+            <div class="progress-bar"><div class="progress-fill" id="task-progress-fill"></div></div>
+            <div class="progress-meta"><strong id="stat-task-percent">0%</strong><span id="stat-task-detail">0 / 0 任务完成</span></div>
+          </div>
+        </div>
+
+        <div class="plan-filter-bar" id="plan-filter-bar" hidden>
+          <span class="plan-filter-label">状态筛选</span>
+          <div class="plan-filter-options" id="plan-filter-options">
+            <button type="button" class="plan-filter chip-on" data-plan-status="all">全部</button>
+            <button type="button" data-plan-status="not_started">未开始</button>
+            <button type="button" data-plan-status="preparing">准备中</button>
+            <button type="button" data-plan-status="ongoing">进行中</button>
+            <button type="button" data-plan-status="done">已完成</button>
+            <button type="button" data-plan-status="abandoned">已放弃</button>
+          </div>
+        </div>
+
+        <div class="plan-list" id="plan-list" hidden></div>
+        <div class="plan-empty" id="plan-empty" hidden>
+          <h4>还没有营销计划</h4>
+          <p>从上方推荐卡片点击「加入我的营销计划」，或点击右上角按钮手动新建。</p>
+          <button class="button button-dark" id="plan-empty-new" type="button">新建营销计划</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="data-section" id="data-management" aria-labelledby="data-title">
+      <div class="container">
+        <div class="section-heading data-heading">
+          <div>
+            <p class="eyebrow light"><span class="eyebrow-line" aria-hidden="true"></span>DATA MANAGEMENT</p>
+            <h2 id="data-title">个人数据管理</h2>
+            <p class="section-description">导出、导入和管理你在本工具中的所有营销计划与任务数据。节日公共数据库不会被覆盖。</p>
+          </div>
+          <div class="data-status" id="data-status">本地存储就绪</div>
+        </div>
+
+        <div class="data-grid">
+          <article class="data-card">
+            <h3>导出我的数据</h3>
+            <p>将当前浏览器中保存的营销计划和任务记录导出为 JSON 文件，方便迁移或备份。</p>
+            <div class="data-buttons">
+              <button class="button button-accent" id="export-plans" type="button">导出营销计划</button>
+              <button class="button button-accent" id="export-tasks" type="button">导出任务记录</button>
+              <button class="button button-accent" id="export-all" type="button">导出完整数据</button>
+            </div>
+          </article>
+
+          <article class="data-card">
+            <h3>导入备份数据</h3>
+            <p>选择之前导出的 JSON 文件进行恢复。导入前会检查文件格式，有效数据才会合并。</p>
+            <div class="data-buttons">
+              <button class="button button-dark" id="import-open" type="button">选择文件导入</button>
+              <input id="import-file" type="file" accept="application/json,.json" hidden>
+            </div>
+            <p class="data-note">导入会<strong>合并</strong>已有数据（按 id 去重），不会自动删除当前数据。</p>
+          </article>
+
+          <article class="data-card danger-card">
+            <h3>清空所有个人数据</h3>
+            <p>删除本浏览器中全部营销计划、任务记录和自动生成的历史数据。<strong>不可恢复。</strong></p>
+            <div class="data-buttons">
+              <button class="button button-danger" id="clear-data" type="button">🗑 清空所有数据</button>
+            </div>
+            <p class="data-note">此操作<strong>不影响</strong>节日公共数据库。</p>
+          </article>
+        </div>
+
+        <div class="data-storage-info">
+          <h4>📦 数据存储说明</h4>
+          <p>• 所有个人数据保存在当前浏览器 LocalStorage 中，仅此浏览器可见。</p>
+          <p>• 节日公共数据库 (<code>holidays.json</code>、<code>marketing-strategies.json</code>) 与个人数据<strong>完全分离</strong>，不受导入、导出和清空操作影响。</p>
+          <p>• 切换年份后，营销计划会保留历史数据，仅日期和倒计时重新计算。</p>
+          <p>• 建议每次大规模运营结束后导出一份备份。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p><strong>© 2026 独立站春哥（亿级操盘手）</strong><span class="footer-divider" aria-hidden="true">｜</span><span>带教咨询微信：<span class="wechat">ch022427</span></span></p>
+      <a href="#main-content" class="back-to-top">返回顶部<span aria-hidden="true">↑</span></a>
+    </div>
+  </footer>
+
+  <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+  <aside class="detail-drawer" id="detail-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" tabindex="-1" hidden>
+    <header class="drawer-header">
+      <div class="drawer-heading">
+        <p class="eyebrow">节日详情</p>
+        <h2 id="drawer-title"></h2>
+        <p id="drawer-name-en"></p>
+      </div>
+      <button class="drawer-close" id="drawer-close" type="button" aria-label="关闭节日详情">×</button>
+    </header>
+    <div class="drawer-body" id="drawer-body"></div>
+  </aside>
+
+  <div class="drawer-backdrop strategy-backdrop" id="strategy-backdrop" hidden></div>
+  <aside class="detail-drawer strategy-drawer" id="strategy-drawer" role="dialog" aria-modal="true" aria-labelledby="strategy-title" tabindex="-1" hidden>
+    <header class="drawer-header strategy-header">
+      <div class="drawer-heading">
+        <p class="eyebrow">完整营销策略</p>
+        <h2 id="strategy-title"></h2>
+        <p id="strategy-subtitle"></p>
+      </div>
+      <button class="drawer-close" id="strategy-close" type="button" aria-label="关闭完整营销策略">×</button>
+    </header>
+    <div class="drawer-body" id="strategy-body"></div>
+  </aside>
+
+  <div class="drawer-backdrop plan-backdrop" id="plan-backdrop" hidden></div>
+  <aside class="detail-drawer plan-drawer" id="plan-drawer" role="dialog" aria-modal="true" aria-labelledby="plan-drawer-title" tabindex="-1" hidden>
+    <header class="drawer-header plan-drawer-header">
+      <div class="drawer-heading">
+        <p class="eyebrow" id="plan-drawer-eyebrow">编辑营销计划</p>
+        <h2 id="plan-drawer-title">新建营销计划</h2>
+        <p id="plan-drawer-subtitle" hidden></p>
+      </div>
+      <button class="drawer-close" id="plan-drawer-close" type="button" aria-label="关闭营销计划">×</button>
+    </header>
+    <div class="drawer-body" id="plan-drawer-body"></div>
+  </aside>
+
+  <div class="confirm-dialog" id="confirm-dialog" hidden role="alertdialog" aria-modal="true" aria-labelledby="confirm-title">
+    <div class="confirm-panel">
+      <h3 id="confirm-title"></h3>
+      <p id="confirm-message"></p>
+      <div class="confirm-actions">
+        <button type="button" class="confirm-cancel" id="confirm-cancel">取消</button>
+        <button type="button" class="confirm-ok" id="confirm-ok">确认删除</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <noscript><div class="noscript">请启用 JavaScript，以读取独立 JSON 数据库并计算全年节日日期。</div></noscript>
+</body>
+</html>

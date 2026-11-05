@@ -1,0 +1,780 @@
+{
+  "meta": {
+    "name": "欧美全年节日营销日历推荐与策略数据库",
+    "version": "3.0.0",
+    "last_verified": "2026-11-05",
+    "locale": "zh-CN",
+    "product_keys": ["jewelry", "beauty", "fashion", "pet", "home", "electronics", "outdoor", "toys", "gifts", "travel", "automotive", "other"],
+    "template_placeholders": ["{product}", "{holiday}", "{holiday_en}", "{country}", "{category}"],
+    "resolution_order": ["event_strategy_map", "type_strategy_map"],
+    "notes": [
+      "产品推荐由产品画像、节日标签、事件映射与类型权重共同驱动，前端无需内置营销建议。",
+      "建议窗口不视为官方活动日期；未确认日期、配送时效及促销资格须在执行前复核。",
+      "公益、宗教与纪念节点优先教育、尊重和真实行动，不默认使用折扣驱动。",
+      "SEO 词条仅用于内容策划，不代表搜索量、排名或竞争度判断。"
+    ]
+  },
+  "product_profiles": {
+    "jewelry": {
+      "reason": "珠宝首饰具有礼品属性",
+      "audience": "伴侣、家庭成员、朋友及纪念人生节点的自我礼赠消费者",
+      "product_angle": "突出材质、工艺、尺寸、佩戴场景与可刻字等真实定制能力，用细节和故事支撑礼赠价值",
+      "landing_page": "/collections/jewelry",
+      "seo_product": "jewelry and personalized accessories",
+      "gift_affinity": 0.98,
+      "preferred_events": ["valentines-day", "international-womens-day", "mothers-day-uk", "mothers-day-us", "mothers-day-germany", "mothers-day-france", "easter-sunday", "international-friendship-day", "graduation-season", "black-friday", "st-nicholas-day", "christmas-eve", "christmas-day"],
+      "type_boosts": {"public": 0.65, "religious": 0.8, "cultural": 1.3, "commercial": 1.15, "seasonal": 0.85, "industry": 0.45, "awareness": 0.75},
+      "feature_terms": {
+        "flower": ["鲜花", "珠宝", "珠宝首饰", "礼盒"],
+        "floral": ["鲜花", "珠宝", "珠宝首饰", "春季装饰"],
+        "botanical": ["鲜花", "春季装饰", "珠宝首饰", "创意礼品"],
+        "earring": ["珠宝首饰", "珠宝", "饰品", "礼赠"],
+        "earrings": ["珠宝首饰", "珠宝", "饰品", "女性用品"]
+      }
+    },
+    "beauty": {
+      "reason": "美妆香氛适合自我关爱、妆容焕新与节日礼赠",
+      "audience": "关注护肤、彩妆、香氛和个护体验的消费者及礼赠购买者",
+      "product_angle": "展示质地、色号、香调、适用肤质和真实使用步骤，礼盒内容如实标注并避免功效夸大",
+      "landing_page": "/collections/beauty",
+      "seo_product": "beauty skincare fragrance and personal care",
+      "gift_affinity": 0.9,
+      "preferred_events": ["new-years-eve", "valentines-day", "international-womens-day", "mothers-day-uk", "mothers-day-us", "mothers-day-germany", "mothers-day-france", "fathers-day-france", "pride-month", "summer-sale-peak", "halloween", "singles-day", "black-friday", "cyber-monday", "christmas-eve", "christmas-day"],
+      "type_boosts": {"public": 0.55, "religious": 0.75, "cultural": 1.25, "commercial": 1.3, "seasonal": 1.0, "industry": 0.75, "awareness": 0.7},
+      "feature_terms": {
+        "fragrance": ["美妆香氛", "香水", "礼品套装", "礼盒"],
+        "lipstick": ["美妆", "服饰美妆", "女性用品", "自我礼赠"],
+        "skincare": ["美妆", "防晒用品", "健康用品", "女性用品"],
+        "vegan": ["纯素美妆", "环保产品", "美妆"],
+        "makeup": ["美妆", "美妆香氛", "万圣节服饰", "派对用品"]
+      }
+    },
+    "fashion": {
+      "reason": "服饰鞋包具有换季需求、社交穿搭与礼赠场景",
+      "audience": "按季节、场合、尺码与风格选购服饰鞋包的成人及家庭消费者",
+      "product_angle": "以完整穿搭、面料、版型、尺码和场合适配为核心，清楚展示换季款与基础款差异",
+      "landing_page": "/collections/fashion",
+      "seo_product": "fashion apparel shoes and accessories",
+      "gift_affinity": 0.78,
+      "preferred_events": ["winter-sale", "st-patricks-day", "spring-sale", "pride-month", "fathers-day-us-uk", "fathers-day-france", "graduation-season", "summer-sale-early", "summer-sale-peak", "summer-clearance", "back-to-school", "first-day-of-fall", "halloween", "fall-sale", "black-friday", "cyber-monday", "boxing-day", "new-years-eve"],
+      "type_boosts": {"public": 0.8, "religious": 0.55, "cultural": 1.15, "commercial": 1.25, "seasonal": 1.4, "industry": 0.8, "awareness": 0.55},
+      "feature_terms": {
+        "dress": ["春装", "夏装", "正装", "派对用品"],
+        "winter": ["冬装", "冬装清仓", "保暖用品"],
+        "summer": ["夏装", "泳装", "夏季服饰", "夏装清仓"],
+        "costume": ["万圣节服饰", "传统服饰", "创意周边"],
+        "green": ["绿色服饰", "服饰", "创意周边"]
+      }
+    },
+    "pet": {
+      "reason": "宠物用品连接养宠日常、动物福利与家庭成员礼赠",
+      "audience": "猫犬及其他宠物饲养者、宠物家庭和关注动物福利的消费者",
+      "product_angle": "按宠物体型、年龄、活动量和使用环境展示用品，强调可核实的材质、清洁与安全信息",
+      "landing_page": "/collections/pet-supplies",
+      "seo_product": "pet supplies toys and accessories",
+      "gift_affinity": 0.68,
+      "preferred_events": ["international-cat-day", "international-dog-day", "world-animal-day", "halloween", "christmas-eve", "christmas-day", "black-friday"],
+      "type_boosts": {"public": 0.35, "religious": 0.35, "cultural": 0.8, "commercial": 1.0, "seasonal": 0.65, "industry": 1.5, "awareness": 0.9},
+      "feature_terms": {
+        "cat": ["猫粮", "猫玩具", "宠物用品", "社交内容"],
+        "dog": ["狗粮", "狗玩具", "宠物用品", "社交内容"],
+        "costume": ["宠物服饰", "万圣节服饰", "社交内容"],
+        "rescue": ["动物公益", "公益合作", "社区活动"],
+        "outdoor": ["宠物用品", "户外用品", "环保产品"]
+      }
+    },
+    "home": {
+      "reason": "家居用品覆盖焕新、收纳、聚餐与家庭礼赠需求",
+      "audience": "新居布置者、家庭采购者、聚餐东道主与宿舍生活人群",
+      "product_angle": "围绕空间前后对比、尺寸、材质、收纳能力和清洁方式呈现真实居家使用效果",
+      "landing_page": "/collections/home-living",
+      "seo_product": "home decor kitchen and living essentials",
+      "gift_affinity": 0.82,
+      "preferred_events": ["winter-sale", "presidents-day", "spring-sale", "early-may-bank-holiday-uk", "mothers-day-us", "memorial-day", "back-to-college", "labor-day-us", "thanksgiving-canada", "thanksgiving-us", "black-friday", "christmas-day", "boxing-day"],
+      "type_boosts": {"public": 1.15, "religious": 0.75, "cultural": 0.9, "commercial": 1.3, "seasonal": 1.35, "industry": 0.65, "awareness": 0.65},
+      "feature_terms": {
+        "kitchen": ["厨房用品", "家居用品", "食品礼盒", "烧烤用品"],
+        "decor": ["家居装饰", "春季装饰", "派对装饰", "暖色主题"],
+        "storage": ["收纳用品", "宿舍用品", "家居用品"],
+        "garden": ["园艺用品", "家居焕新", "户外用品"],
+        "reusable": ["可重复使用用品", "环保产品", "家居用品"]
+      }
+    },
+    "electronics": {
+      "reason": "电子产品满足学习、娱乐、影音和高效生活需求",
+      "audience": "学生、家庭影音用户、远程办公者及有明确参数需求的礼赠购买者",
+      "product_angle": "用兼容性、核心参数、真实演示和配件清单降低选择成本，避免无依据的性能对比",
+      "landing_page": "/collections/electronics",
+      "seo_product": "electronics devices audio and smart accessories",
+      "gift_affinity": 0.8,
+      "preferred_events": ["super-bowl", "presidents-day", "fathers-day-us-uk", "fathers-day-france", "graduation-season", "amazon-prime-day", "back-to-school", "back-to-college", "labor-day-us", "black-friday", "cyber-monday", "green-monday", "boxing-day"],
+      "type_boosts": {"public": 0.95, "religious": 0.35, "cultural": 0.75, "commercial": 1.5, "seasonal": 1.15, "industry": 1.15, "awareness": 0.25},
+      "feature_terms": {
+        "laptop": ["笔记本电脑", "电子产品", "学习用品"],
+        "tv": ["电视影音", "电子产品", "运动用品"],
+        "audio": ["电视影音", "电子产品", "派对用品"],
+        "appliance": ["小家电", "家居用品", "宿舍用品"],
+        "subscription": ["订阅产品", "线上专享", "数字产品"]
+      }
+    },
+    "outdoor": {
+      "reason": "户外用品适配季节活动、家庭聚会与探索自然场景",
+      "audience": "露营、徒步、园艺、烧烤和近郊出行爱好者及家庭采购者",
+      "product_angle": "按天气、地形、人数与收纳运输条件讲解装备组合，展示可核实的耐用性和适用边界",
+      "landing_page": "/collections/outdoor-gear",
+      "seo_product": "outdoor camping hiking and garden gear",
+      "gift_affinity": 0.7,
+      "preferred_events": ["spring-sale", "earth-day", "easter-monday", "early-may-bank-holiday-uk", "memorial-day", "fathers-day-us-uk", "fathers-day-germany", "summer-sale-early", "canada-day", "independence-day-us", "summer-sale-peak", "summer-clearance", "labor-day-us", "first-day-of-fall", "black-friday"],
+      "type_boosts": {"public": 1.25, "religious": 0.6, "cultural": 0.85, "commercial": 1.1, "seasonal": 1.5, "industry": 0.85, "awareness": 1.0},
+      "feature_terms": {
+        "camping": ["户外用品", "旅行用品", "夏季服饰"],
+        "bbq": ["烧烤用品", "户外用品", "派对食品"],
+        "garden": ["园艺用品", "家居焕新", "春季用品"],
+        "eco": ["环保产品", "可重复使用用品", "户外用品"],
+        "hiking": ["户外用品", "运动用品", "旅行用品"]
+      }
+    },
+    "toys": {
+      "reason": "玩具与儿童礼品连接亲子互动、成长庆祝和节日惊喜",
+      "audience": "家长、亲友、礼品购买者及关注亲子共同活动的家庭",
+      "product_angle": "按适用年龄、玩法、陪伴方式和收纳清洁展示产品，清楚标注安全信息与成人协助需求",
+      "landing_page": "/collections/toys-games",
+      "seo_product": "toys games and children gifts",
+      "gift_affinity": 0.94,
+      "preferred_events": ["easter-sunday", "childrens-day-applicable-markets", "international-cat-day", "international-dog-day", "back-to-school", "halloween", "black-friday", "cyber-monday", "world-childrens-day", "st-nicholas-day", "christmas-eve", "christmas-day"],
+      "type_boosts": {"public": 0.75, "religious": 0.95, "cultural": 1.25, "commercial": 1.25, "seasonal": 0.95, "industry": 0.9, "awareness": 0.8},
+      "feature_terms": {
+        "educational": ["教育用品", "学习用品", "儿童用品", "玩具"],
+        "cat": ["猫玩具", "宠物用品", "玩具"],
+        "dog": ["狗玩具", "宠物用品", "玩具"],
+        "easter": ["彩蛋", "儿童礼品", "巧克力"],
+        "stocking": ["袜子", "小型礼盒", "儿童礼品", "圣诞礼品"]
+      }
+    },
+    "gifts": {
+      "reason": "综合礼品能按收礼对象、关系和场合快速组合",
+      "audience": "为伴侣、家人、朋友、同事和庆祝活动寻找礼品的消费者",
+      "product_angle": "用收礼对象、兴趣、包装、定制和贺卡服务组织选礼路径，避免只按折扣排列商品",
+      "landing_page": "/collections/gifts",
+      "seo_product": "gift sets greeting cards and personalized gifts",
+      "gift_affinity": 1.0,
+      "preferred_events": ["valentines-day", "mothers-day-uk", "mothers-day-us", "mothers-day-germany", "mothers-day-france", "fathers-day-us-uk", "fathers-day-germany", "fathers-day-france", "graduation-season", "international-friendship-day", "grandparents-day", "thanksgiving-canada", "thanksgiving-us", "small-business-saturday", "st-nicholas-day", "christmas-eve", "christmas-day"],
+      "type_boosts": {"public": 0.9, "religious": 1.0, "cultural": 1.4, "commercial": 1.1, "seasonal": 1.1, "industry": 0.65, "awareness": 0.9},
+      "feature_terms": {
+        "personalized": ["创意礼品", "家庭礼品", "圣诞礼品", "毕业礼品"],
+        "card": ["贺卡", "创意礼品", "社交内容"],
+        "flowers": ["鲜花", "礼盒", "家庭礼品"],
+        "handmade": ["手工艺品", "独立品牌", "创意礼品"],
+        "food": ["食品礼盒", "秋季礼品", "巧克力", "小型礼盒"]
+      }
+    },
+    "travel": {
+      "reason": "旅行用品服务假期出行、收纳整理与旅途舒适需求",
+      "audience": "休闲度假、探亲、城市短途和户外出行人群及旅行礼赠购买者",
+      "product_angle": "按行程长度、交通方式、收纳容量与天气展示旅行组合，清楚说明尺寸和适用场景",
+      "landing_page": "/collections/travel-essentials",
+      "seo_product": "travel luggage organizers and accessories",
+      "gift_affinity": 0.66,
+      "preferred_events": ["spring-sale", "memorial-day", "graduation-season", "summer-sale-early", "summer-sale-peak", "summer-clearance", "labor-day-us", "black-friday", "new-years-day"],
+      "type_boosts": {"public": 1.1, "religious": 0.35, "cultural": 0.7, "commercial": 1.15, "seasonal": 1.45, "industry": 0.55, "awareness": 0.35},
+      "feature_terms": {
+        "luggage": ["旅行用品", "鞋包", "毕业礼品"],
+        "swim": ["泳装", "夏装", "旅行用品"],
+        "organizer": ["收纳用品", "旅行用品", "宿舍用品"],
+        "beach": ["泳装", "防晒用品", "旅行用品"],
+        "winter": ["冬装", "保暖用品", "旅行用品"]
+      }
+    },
+    "automotive": {
+      "reason": "汽车用品以实用维护、长途出行和车主礼赠为主",
+      "audience": "车主、自驾出行者、汽车维护爱好者及购买实用礼品的家庭成员",
+      "product_angle": "突出车型兼容、安装条件、收纳维护与出行检查用途，不借无关节日泛化推荐",
+      "landing_page": "/collections/automotive-accessories",
+      "seo_product": "automotive accessories and car care products",
+      "gift_affinity": 0.46,
+      "preferred_events": ["presidents-day", "memorial-day", "fathers-day-us-uk", "fathers-day-germany", "labor-day-us", "black-friday"],
+      "type_boosts": {"public": 0.9, "religious": 0.1, "cultural": 0.55, "commercial": 1.15, "seasonal": 0.7, "industry": 0.45, "awareness": 0.1},
+      "feature_terms": {
+        "car": ["汽车用品", "工具", "男士礼品"],
+        "roadtrip": ["汽车用品", "旅行用品", "户外用品"],
+        "repair": ["工具", "汽车用品", "电子产品"],
+        "winter": ["汽车用品", "保暖用品", "冬季用品"],
+        "gift": ["男士礼品", "汽车用品", "工具"]
+      }
+    },
+    "other": {
+      "reason": "其他品类需依据实际材质、用途与标签审慎匹配节点",
+      "audience": "有明确兴趣、实用需求或文化内容需求的分众消费者",
+      "product_angle": "先识别产品真实用途与内容价值，再选择少量相关节点，以原创故事和可核实属性替代泛化促销",
+      "landing_page": "/collections/all-products",
+      "seo_product": "specialty products and lifestyle accessories",
+      "gift_affinity": 0.5,
+      "preferred_events": ["groundhog-day", "april-fools-day", "world-emoji-day", "international-friendship-day", "small-business-saturday", "giving-tuesday", "new-years-day"],
+      "type_boosts": {"public": 0.45, "religious": 0.25, "cultural": 0.85, "commercial": 0.75, "seasonal": 0.65, "industry": 0.9, "awareness": 0.8},
+      "feature_terms": {
+        "book": ["书籍", "教育用品", "文化内容"],
+        "handmade": ["手工艺品", "独立品牌", "创意周边"],
+        "eco": ["环保产品", "环保用品", "可重复使用用品"],
+        "party": ["派对用品", "创意周边", "活动用品"],
+        "charity": ["公益联名", "公益捐赠", "社区活动"]
+      }
+    }
+  },
+  "price_profiles": {
+    "under25": {
+      "label": "25 以下（按站点币种展示）",
+      "promotion": "适合作为小礼物、凑单或多件组合；可展示真实可用的阶梯优惠与免邮门槛，不虚构原价。"
+    },
+    "25to50": {
+      "label": "25–50（按站点币种展示）",
+      "promotion": "适合节日伴手礼与轻礼盒，优先呈现组合价值、贺卡和包装服务，折扣以实际活动为准。"
+    },
+    "50to100": {
+      "label": "50–100（按站点币种展示）",
+      "promotion": "适合主推礼盒与实用套装，通过对象和使用场景分层，可配置真实有效的会员或套装权益。"
+    },
+    "100to250": {
+      "label": "100–250（按站点币种展示）",
+      "promotion": "适合核心礼赠与品质升级，突出材质、服务和售后保障；如提供分期或赠品，须清楚说明条件。"
+    },
+    "over250": {
+      "label": "250 以上（按站点币种展示）",
+      "promotion": "适合高客单礼赠与耐用型产品，强化细节、咨询、保修和配送确定性，不单纯依赖大幅降价。"
+    }
+  },
+  "event_strategy_map": {
+    "new-years-day": "new-year",
+    "new-years-eve": "new-year",
+    "valentines-day": "valentine",
+    "international-womens-day": "womens-day",
+    "mothers-day-uk": "mothers-day",
+    "mothers-day-us": "mothers-day",
+    "mothers-day-germany": "mothers-day",
+    "mothers-day-france": "mothers-day",
+    "easter-sunday": "easter",
+    "fathers-day-us-uk": "fathers-day",
+    "fathers-day-germany": "fathers-day",
+    "fathers-day-france": "fathers-day",
+    "amazon-prime-day": "prime-day",
+    "back-to-school": "back-to-school",
+    "back-to-college": "back-to-school",
+    "halloween": "halloween",
+    "thanksgiving-canada": "thanksgiving",
+    "thanksgiving-us": "thanksgiving",
+    "black-friday": "black-friday",
+    "cyber-monday": "cyber-monday",
+    "christmas-eve": "christmas",
+    "christmas-day": "christmas"
+  },
+  "type_strategy_map": {
+    "public": "public",
+    "religious": "religious",
+    "cultural": "cultural",
+    "commercial": "commercial",
+    "seasonal": "seasonal",
+    "industry": "industry",
+    "awareness": "awareness"
+  },
+  "strategies": {
+    "new-year": {
+      "scene": "跨年庆祝、新年焕新与年度目标启动物品的消费场景",
+      "motivation": "消费者希望告别旧岁、营造庆祝氛围，并以实用产品支持新一年的生活计划。",
+      "directions": [
+        {"name": "场景营销", "description": "分别呈现跨年夜聚会、元旦居家整理和新年计划启动，避免用同一套派对素材覆盖所有需求。"},
+        {"name": "产品展示", "description": "用前后对比或一天时间线展示{product}如何参与整理、穿搭、健康计划或新年礼物准备。"},
+        {"name": "礼品推荐", "description": "按送自己、送朋友和送家人组织礼物清单，补充包装与电子礼品选择以覆盖临近节日需求。"},
+        {"name": "情感", "description": "邀请用户写下一个可执行的新年愿望，以真实生活目标取代空泛的成功口号。"}
+      ],
+      "social": {
+        "TikTok": ["拍摄跨年夜到元旦早晨的转场，展示{product}在派对收尾和新年整理中的两种用途。", "发起“一件物品支持一个新年计划”挑战，用连续短镜头演示可执行的小目标。"],
+        "Instagram": ["发布九宫格年度焕新灵感，每格对应一个居家、穿搭或礼赠场景并链接对应商品。", "用轮帖提供新年礼物对象测试，最后一页汇总不同关系的选择建议。"],
+        "Facebook": ["创建新年计划讨论帖，邀请用户分享目标，再由品牌整理不含医疗承诺的实用清单。", "面向本地社群发布跨年营业与配送服务说明，同时搭配节日商品指南。"],
+        "Pinterest": ["制作“新年焕新清单”竖版信息图，将{product}嵌入居家、办公和旅行分类。", "设计跨年餐桌与派对布置画板，为每项装饰链接可购买的对应产品。"]
+      },
+      "ads": {
+        "theme": "新年新计划与跨年焕新",
+        "creative": "短视频从夜晚庆祝切换到清晨整理，以三个真实使用画面呈现{product}的功能和礼赠方式。",
+        "copy": "把新年愿望变成日常行动，为{holiday}挑选适合计划的{product}。",
+        "audience": "面向{country}关注新年焕新、家居整理、聚会准备及节日礼赠的用户，再按实际产品兴趣细分。",
+        "promotion": "可组合真实有效的新年套装、包装服务或配送权益，活动条件和截止时间须明确展示。",
+        "landing": "进入按派对、焕新、自我礼赠分区的新年专题页，提供场景筛选和清晰配送说明。"
+      },
+      "seo": ["New Year {product} ideas", "New Year's Eve party essentials", "New Year gift ideas for friends", "New Year refresh checklist", "New Year {product} in {country}", "New Year self gift guide"]
+    },
+    "valentine": {
+      "scene": "伴侣表达爱意、朋友互赠以及自我关爱的情人节礼赠场景",
+      "motivation": "消费者希望找到符合关系亲密度与对方喜好的礼物，并通过细节表达用心而非只比较价格。",
+      "directions": [
+        {"name": "礼品推荐", "description": "按伴侣、朋友、自己和不同关系阶段组织{product}，用兴趣与收礼偏好替代笼统的男女标签。"},
+        {"name": "情感", "description": "围绕共同记忆、感谢和陪伴讲述礼物含义，提供可真实实现的刻字、贺卡或照片定制。"},
+        {"name": "产品展示", "description": "特写材质、尺寸、颜色、香气或使用步骤，让线上消费者能判断礼物是否符合对方喜好。"},
+        {"name": "促销", "description": "将礼盒、贺卡和包装作为便利组合，明确定制周期和配送限制，避免以虚假倒计时制造压力。"}
+      ],
+      "social": {
+        "TikTok": ["拍摄“根据对方三个兴趣选礼物”的快速决策视频，展示不同{product}与收礼性格的对应关系。", "用第一视角记录写贺卡、包装和递交礼物的过程，突出可复制的细节而非昂贵布置。"],
+        "Instagram": ["发布伴侣、朋友和自我礼赠三组轮帖，每组给出风格、尺寸或使用场景选择提示。", "征集用户匿名分享最用心的小礼物，将回答整理成不含隐私信息的灵感故事。"],
+        "Facebook": ["发起“今年想感谢谁”的话题讨论，引导用户关注陪伴与友谊，而非仅限恋爱关系。", "发布定制、包装与配送常见问题说明，并链接按对象筛选的情人节礼物页。"],
+        "Pinterest": ["制作按收礼对象划分的情人节礼物画板，为每件{product}补充风格和场景标签。", "设计居家约会与心意卡片搭配指南，将餐食、装饰和小礼物组织成可保存清单。"]
+      },
+      "ads": {
+        "theme": "按关系与兴趣选择有心意的礼物",
+        "creative": "用三个收礼对象的分屏故事展示挑选、包装和拆礼瞬间，穿插{product}关键细节特写。",
+        "copy": "不只送一份礼物，送出对TA喜好的理解；探索适合{holiday}的{product}。",
+        "audience": "面向{country}近期浏览礼赠、相关兴趣或产品详情的人群，并区分伴侣礼赠、朋友礼赠和自我购买意图。",
+        "promotion": "提供真实可用的礼盒组合、贺卡或定制服务，页面同步说明个性化商品的退换及发货条件。",
+        "landing": "进入情人节选礼页，按对象、兴趣和价格带筛选，直接查看产品细节、包装及服务条件。"
+      },
+      "seo": ["Valentine's Day {product} gifts", "Valentine gift ideas for partner", "Valentine gifts for friends", "Self care Valentine's Day gifts", "Personalized Valentine's {product}", "Valentine's Day gift guide {country}"]
+    },
+    "womens-day": {
+      "scene": "国际妇女节表达尊重、支持女性创作者与理性礼赠的场景",
+      "motivation": "用户关注女性成就、平等与真实支持行动，也可能为身边女性或自己挑选有意义的礼物。",
+      "directions": [
+        {"name": "情感", "description": "以真实人物经授权的讲述呈现成就、劳动与多元人生，避免把节日简化成外貌赞美或刻板角色。"},
+        {"name": "产品展示", "description": "若产品由女性创作或具备相关服务价值，清楚展示创作者、工艺与用途，不借公益标签掩盖商业信息。"},
+        {"name": "礼品推荐", "description": "按兴趣和个人选择提供{product}清单，避免假设所有女性都偏好同一品类，并允许无节日标签选购。"},
+        {"name": "场景营销", "description": "将阅读、学习、工作与日常自我关爱作为内容场景，品牌公益行动须披露合作方与执行方式。"}
+      ],
+      "social": {
+        "TikTok": ["邀请经授权的女性创作者或员工讲述一项真实工作过程，镜头聚焦技能与经验而非外貌。", "制作“选择礼物前先问兴趣”短片，用多个不同爱好打破统一女性礼物模板。"],
+        "Instagram": ["发布女性创作者系列轮帖，每页介绍作品、创作背景及可核实的品牌支持方式。", "用故事投票了解用户想支持的实际行动，并公开后续内容或合作进展。"],
+        "Facebook": ["分享权威资料与社区活动信息，同时说明品牌参与边界，不以纪念节点替代长期行动。", "组织一场女性创作者对谈或线上问答，提前收集关于职业与工艺的具体问题。"],
+        "Pinterest": ["创建女性创作者作品与访谈画板，链接至完整故事及真实商品来源。", "制作按阅读、艺术、户外和科技兴趣划分的礼物灵感图，不采用单一粉色视觉。"]
+      },
+      "ads": {
+        "theme": "尊重多元选择并呈现真实支持",
+        "creative": "以人物访谈片段与作品细节交叉剪辑，所有身份和合作陈述均取得授权并可核实。",
+        "copy": "看见每一种选择与成就；从真实兴趣出发，了解{product}与{holiday}内容专题。",
+        "audience": "面向{country}关注相关创作者、品类兴趣和礼赠内容的用户，不以敏感身份推断进行定向。",
+        "promotion": "不默认折扣；如有联名、捐赠或创作者收益安排，须完整说明比例、对象、期限与限制。",
+        "landing": "进入包含人物故事、产品来源、公益说明与兴趣选礼入口的专题页，商业和公益信息清晰分区。"
+      },
+      "seo": ["International Women's Day gift ideas", "Women creators {product} guide", "Gifts based on her interests", "International Women's Day stories", "Meaningful gifts for women", "Women owned {category} brands"]
+    },
+    "mothers-day": {
+      "scene": "母亲节的情感表达和送礼消费场景",
+      "motivation": "消费者希望感谢母亲或生命中的照护者，通过符合其兴趣的礼物、陪伴和真诚文字表达心意。",
+      "directions": [
+        {"name": "情感", "description": "以具体生活片段表达感谢，尊重多元家庭结构，也允许用户选择不接收可能引发不适的节日内容。"},
+        {"name": "礼品推荐", "description": "按母亲或照护者的真实兴趣、使用习惯和关系筛选{product}，提供经典、个性化与体验型选择。"},
+        {"name": "产品展示", "description": "通过佩戴、使用、包装和尺寸细节解释礼物为何适合日常，而非只展示拆箱瞬间。"},
+        {"name": "促销", "description": "组合礼盒、手写贺卡和包装等便利服务，清楚说明个性化周期和不同市场的配送安排。"}
+      ],
+      "social": {
+        "TikTok": ["拍摄“记住她提过的小愿望”选礼短片，从一句日常线索过渡到{product}细节与贺卡。", "邀请用户用三张照片讲述与母亲或照护者的普通一天，人物出现须取得授权。"],
+        "Instagram": ["发布按园艺、阅读、美妆、旅行等兴趣划分的选礼轮帖，每页提供具体产品选择依据。", "制作可保存的感谢话语模板，同时设置无礼物也能表达心意的陪伴清单。"],
+        "Facebook": ["发起照护者故事征集，允许用户只分享文字并提醒避免公开敏感家庭信息。", "针对不同国家分别发布礼物指南与服务说明，避免混用英国、美国、德国和法国节点。"],
+        "Pinterest": ["制作“按她的兴趣选礼物”画板，将{product}与真实爱好和使用场景一一关联。", "设计母亲节早午餐、花束与桌面布置灵感图，并提供简洁可执行的准备清单。"]
+      },
+      "ads": {
+        "theme": "从她的真实兴趣出发表达感谢",
+        "creative": "以日常回忆、礼物挑选和使用反应构成短片，展示{product}的材质、功能与个性化细节。",
+        "copy": "把感谢放进她在乎的细节里，为{holiday}挑选真正适合她的{product}。",
+        "audience": "面向{country}有家庭礼赠、相关品类或兴趣内容互动的用户，按节点所在国家独立组织素材和页面。",
+        "promotion": "可展示真实有效的礼盒、刻字、贺卡或包装权益，清楚标注条件，不使用虚构库存和倒计时。",
+        "landing": "进入对应国家的母亲节选礼页，按对象兴趣、产品类型和价格带筛选，并提供定制与配送说明。"
+      },
+      "seo": ["Mother's Day Gifts", "Best Gifts for Mom", "Unique Mother's Day {product}", "Personalized Gifts for Mother", "Gift Ideas for Mom", "Mother's Day gifts by interest"]
+    },
+    "easter": {
+      "scene": "复活节家庭团聚、春日活动与儿童礼赠的消费场景",
+      "motivation": "家庭希望准备聚餐、春季装饰和互动活动，宗教用户也可能重视节日本身的信仰意义。",
+      "directions": [
+        {"name": "场景营销", "description": "区分家庭聚餐、儿童寻蛋和春季出游内容，并为重视宗教意义的受众保留克制表达。"},
+        {"name": "产品展示", "description": "演示{product}在餐桌、装饰、户外活动或儿童互动中的用途，清楚标注适用年龄和材质。"},
+        {"name": "礼品推荐", "description": "按儿童、家庭和春季小礼物整理清单，避免将宗教符号仅作为猎奇装饰。"},
+        {"name": "情感", "description": "围绕团聚、更新与共同活动设计内容，不把彩蛋和兔子形象强加给所有宗教传播。"}
+      ],
+      "social": {
+        "TikTok": ["发布家庭寻蛋活动布置过程，展示路线、安全边界和{product}收纳方式，儿童出镜须获监护人许可。", "用春日餐桌从空桌到完成布置的延时视频呈现装饰和餐具的实际搭配。"],
+        "Instagram": ["发布复活节家庭活动轮帖，分别给出室内、庭院和雨天替代方案。", "分享儿童小礼物选择指南，以年龄、玩法和共同陪伴时间而不是数量为分类。"],
+        "Facebook": ["创建家庭聚餐准备清单讨论，邀请用户交换适合不同家庭规模的活动经验。", "发布宗教文化与春季民俗内容分区清晰的专题介绍，并提供当地营业服务信息。"],
+        "Pinterest": ["制作复活节餐桌与春季配色画板，链接具体装饰、餐具和可重复使用用品。", "设计儿童寻蛋与亲子手工信息图，标明所需材料、步骤和成人协助环节。"]
+      },
+      "ads": {
+        "theme": "春日团聚与家庭互动准备",
+        "creative": "以家庭共同准备餐桌和活动的过程为主画面，穿插{product}细节及收纳复用方式。",
+        "copy": "为团聚、春日活动和小心意做好准备，探索适合{holiday}的{product}。",
+        "audience": "面向{country}关注家庭活动、春季装饰、儿童礼品或相关产品的用户，并尊重宗教内容偏好。",
+        "promotion": "优先提供真实有效的家庭组合、包装或复用型产品权益，不用宗教符号制造限时焦虑。",
+        "landing": "进入按家庭聚餐、儿童活动、春季装饰与礼物分区的专题页，附年龄和使用说明。"
+      },
+      "seo": ["Easter {product} ideas", "Easter gifts for children", "Easter family activity checklist", "Easter table decoration ideas", "Spring gift basket ideas", "Easter essentials in {country}"]
+    },
+    "fathers-day": {
+      "scene": "父亲节感谢父亲与照护者的实用礼赠和共同活动场景",
+      "motivation": "消费者希望根据对方的工具、户外、科技或生活兴趣选择耐用实用的礼物，并创造共同相处时间。",
+      "directions": [
+        {"name": "礼品推荐", "description": "按真实爱好而非性别刻板印象组织{product}，覆盖父亲、祖父及其他承担照护角色的人。"},
+        {"name": "产品展示", "description": "用参数、耐用性、兼容性和实际操作演示说明价值，特别明确工具与汽车用品的适配条件。"},
+        {"name": "情感", "description": "讲述共同修理、烹饪、徒步或旅行的具体记忆，将礼物与陪伴计划自然结合。"},
+        {"name": "场景营销", "description": "按不同国家和文化分别设置页面与素材，德国相关节点不与美英法日期表达混用。"}
+      ],
+      "social": {
+        "TikTok": ["拍摄“从他的一个爱好出发”选礼短片，展示工具、户外或科技{product}的实际使用。", "记录一次共同完成的小项目，以步骤和互动为主，礼物只在关键环节自然出现。"],
+        "Instagram": ["发布按烹饪、露营、影音、个护和手工分类的选礼轮帖，每项附选择注意事项。", "制作可转发的感谢卡片故事模板，允许用户填写一段属于两人的具体回忆。"],
+        "Facebook": ["邀请用户分享从父亲或照护者那里学到的一项技能，将UGC整理为社区故事。", "按美国英国、德国和法国分别发布专题，说明当地页面、服务和配送信息。"],
+        "Pinterest": ["创建实用礼物与共同活动画板，把{product}和周末项目、户外路线或聚餐方案配对。", "制作工具与汽车用品选购检查图，突出兼容、尺寸、安装和保养信息。"]
+      },
+      "ads": {
+        "theme": "按兴趣选择实用礼物并安排共同时间",
+        "creative": "通过真实操作和共同活动展示{product}，配合兼容性、材质或使用步骤的简短标注。",
+        "copy": "从TA真正喜欢的事出发，为{holiday}选一份能用进日常的{product}。",
+        "audience": "面向{country}关注实用礼赠、工具、户外、科技或个护内容的用户，按不同国家节点拆分投放。",
+        "promotion": "可提供真实有效的套装、刻字、贺卡或服务权益，定制化与安装条件须在购买前展示。",
+        "landing": "进入对应市场的父亲节专题页，按兴趣、实用场景和价格带筛选，并展示参数与售后信息。"
+      },
+      "seo": ["Father's Day {product} gifts", "Practical gifts for dad", "Father's Day gifts by hobby", "Personalized gifts for father", "Outdoor gifts for dad", "Father's Day gift guide {country}"]
+    },
+    "prime-day": {
+      "scene": "亚马逊会员日期间比价、清单采购与会员专享消费场景",
+      "motivation": "消费者希望快速确认产品是否符合需求、优惠是否真实，并在官方活动期内完成计划内购买。",
+      "directions": [
+        {"name": "产品展示", "description": "用核心参数、兼容性和对比表减少选择成本，清楚区分产品差异，不作无依据的最佳宣称。"},
+        {"name": "促销", "description": "仅展示经活动后台确认的资格、价格、库存和期限，官方日期未公布前只做素材与清单准备。"},
+        {"name": "场景营销", "description": "按学习、居家、影音和礼赠需求组织选购清单，避免把全品类商品无差别推给所有用户。"},
+        {"name": "礼品推荐", "description": "为已有礼赠计划的用户提供按对象和用途筛选的{product}，避免仅因折扣推荐不需要的商品。"}
+      ],
+      "social": {
+        "TikTok": ["制作三项参数看懂{product}的讲解视频，画面同时展示适用人群与不适用情形。", "拍摄购物清单整理过程，先定义需求再核对活动资格，避免鼓励冲动囤货。"],
+        "Instagram": ["发布同系列产品差异轮帖，用一致维度展示规格、配件与使用场景。", "通过故事问答收集购买障碍，再用参数演示和常见问题卡片逐一回答。"],
+        "Facebook": ["建立会员日选购讨论帖，集中回复兼容性、保修、配送与退换问题。", "在官方信息确认后更新活动时间与资格说明，并保留更新时间和信息来源。"],
+        "Pinterest": ["制作学习、居家和影音采购清单画板，链接对应参数表与商品详情。", "设计高客单产品购买前检查图，涵盖尺寸、兼容、配件、保修和退换条件。"]
+      },
+      "ads": {
+        "theme": "先明确需求再核对会员日优惠",
+        "creative": "以需求清单、产品演示和规格对比构成素材，仅在确认后叠加活动价格及期限信息。",
+        "copy": "把需求列清楚，再看优惠是否合适；查看{product}的参数、场景与活动说明。",
+        "audience": "面向{country}已浏览相关品类、收藏清单或比较规格的高意向用户，不假设所有访问者具备会员资格。",
+        "promotion": "只使用真实确认的会员优惠、套装或配送权益，未获活动资格时使用常规价值内容而非虚构折扣。",
+        "landing": "进入参数对比清晰的品类活动页，显示适用条件、库存状态、售后与配送信息。"
+      },
+      "seo": ["Prime Day {product} deals", "Prime Day shopping checklist", "Best {category} features to compare", "Prime Day gift ideas", "How to choose {product}", "Prime Day electronics and home guide"]
+    },
+    "back-to-school": {
+      "scene": "中小学与大学返校前学习、住宿和日常用品采购场景",
+      "motivation": "家长和学生希望按学校要求、年龄、课程与住宿条件备齐用品，控制浪费并减少遗漏。",
+      "directions": [
+        {"name": "场景营销", "description": "区分中小学课堂、大学宿舍和通勤需求，不用同一份清单覆盖不同年龄与国家。"},
+        {"name": "产品展示", "description": "展示尺寸、容量、兼容性、耐用性和收纳方式，通过装包或宿舍实景验证是否适用。"},
+        {"name": "促销", "description": "将真实需要的物品组成学习或住宿套装，明确单件价格、套装差异与退换规则。"},
+        {"name": "礼品推荐", "description": "为入学、升年级和离家住宿提供实用小礼物，重点支持新阶段而非制造焦虑。"}
+      ],
+      "social": {
+        "TikTok": ["拍摄一只书包按学校清单装好的过程，直观展示{product}容量、隔层和重量分配。", "用宿舍小空间改造前后对比展示收纳与小家电，明确尺寸及学校用电限制需先核对。"],
+        "Instagram": ["发布中小学与大学两套返校轮帖，每页按必需、可选和先核对学校要求分类。", "邀请学生展示真实书桌或收纳方案，并标注使用产品与实际空间条件。"],
+        "Facebook": ["面向家长创建清单问答帖，按年龄段集中解答尺码、耐用性和售后问题。", "分享目标市场学校日程需自行核对的提醒，并提供可下载的空白采购清单。"],
+        "Pinterest": ["制作分年龄返校采购画板，将文具、童装、电子产品和收纳用品分别归档。", "设计宿舍布局与收纳信息图，为每项用品标注尺寸测量和共用空间注意事项。"]
+      },
+      "ads": {
+        "theme": "按年龄、课程和住宿条件精准备齐",
+        "creative": "以清单逐项核对和实际装包、布置画面展示{product}，突出容量、尺寸及兼容信息。",
+        "copy": "先按真实需求列清单，再为{holiday}选择耐用合适的{product}。",
+        "audience": "面向{country}有返校采购、学生用品、宿舍布置或相关品类行为的家长与学生，按年龄段拆分内容。",
+        "promotion": "提供真实有效的学习套装、住宿组合或会员权益，清楚列出套装内容和条件，不制造开学焦虑。",
+        "landing": "进入按中小学、大学和住宿场景分区的返校页，支持清单筛选并展示参数与配送退换说明。"
+      },
+      "seo": ["Back to school {product} checklist", "Back to college dorm essentials", "School supplies by age", "Student {product} buying guide", "Dorm room organization ideas", "Back to school gifts for students"]
+    },
+    "halloween": {
+      "scene": "万圣节装扮、糖果派发、派对布置与亲子娱乐消费场景",
+      "motivation": "消费者希望完成有辨识度且舒适安全的装扮，并准备可复用的装饰和适合聚会的产品。",
+      "directions": [
+        {"name": "场景营销", "description": "按家庭 trick-or-treat、成人派对、宠物内容和居家观影分别策划，不混用儿童与成人素材。"},
+        {"name": "产品展示", "description": "用完整造型、妆容步骤、尺寸和夜间可见性展示{product}，宠物装扮须优先考虑舒适与自愿。"},
+        {"name": "促销", "description": "组合可复用装饰与装扮配件，清楚说明套装内容，避免临近节日以虚假物流承诺催单。"},
+        {"name": "情感", "description": "鼓励朋友和家人共同创作主题造型，避免文化刻板扮装、污名化精神疾病或恐吓式表达。"}
+      ],
+      "social": {
+        "TikTok": ["发布日常单品变身万圣节造型的分步视频，用同一件{product}完成三种不同风格。", "拍摄宠物装扮前先进行舒适度检查，若宠物不适应则改用无穿戴的场景拍摄。"],
+        "Instagram": ["发布妆容、服饰和装饰搭配的轮帖，标注所需步骤、尺码和可复用单品。", "发起友好主题造型投票，让用户选择下一期教程而非上传未经同意的他人照片。"],
+        "Facebook": ["创建社区派对与家庭活动安全清单，讨论照明、糖果过敏原和儿童成人陪同安排。", "发布本地营业和配送信息，同时收集用户可复用装饰的收纳经验。"],
+        "Pinterest": ["制作按恐怖、复古、可爱和极简风格划分的造型画板，链接具体{product}。", "设计可复用门廊与餐桌布置图，提供材料、尺寸和收纳方式说明。"]
+      },
+      "ads": {
+        "theme": "用可复用单品完成安全有创意的万圣节计划",
+        "creative": "以造型变装和派对布置转场展示{product}，补充尺码、使用步骤及儿童或宠物安全提示。",
+        "copy": "从一件{product}开始完成{holiday}造型与布置，让创意好看也能继续使用。",
+        "audience": "面向{country}关注装扮、美妆、派对、亲子活动或宠物内容的用户，分别匹配对应商品和素材。",
+        "promotion": "可提供真实有效的装扮套装或装饰组合，明示套装内容、配送限制和定制商品规则。",
+        "landing": "进入按造型、装饰、美妆、宠物和派对分区的专题页，附教程、尺码和安全说明。"
+      },
+      "seo": ["Halloween {product} ideas", "Halloween costume accessories", "Reusable Halloween decorations", "Halloween party checklist", "Pet safe Halloween costume ideas", "Halloween makeup and fashion guide"]
+    },
+    "thanksgiving": {
+      "scene": "感恩节家庭聚餐、感谢表达与东道主礼赠的消费场景",
+      "motivation": "消费者希望为团聚准备餐桌、厨房与家居用品，并以实用礼物或真诚行动感谢家人和东道主。",
+      "directions": [
+        {"name": "场景营销", "description": "按备餐、餐桌布置、亲友相聚和节后收纳组织内容，加拿大与美国分别使用独立页面。"},
+        {"name": "情感", "description": "邀请用户具体感谢一个人或一段帮助，避免把家庭团聚描绘成所有人的唯一选择。"},
+        {"name": "产品展示", "description": "通过容量、尺寸、清洁和实际操作展示{product}，让东道主判断是否适合聚餐规模。"},
+        {"name": "礼品推荐", "description": "提供东道主、家人和秋季家居小礼物清单，并考虑无法到场者的寄送与贺卡需求。"}
+      ],
+      "social": {
+        "TikTok": ["拍摄从备餐清单到餐桌完成的流程，展示{product}在哪一步节省时间或改善收纳。", "邀请用户用一句话说出今年具体感谢的小事，品牌将其整理为匿名文字短片。"],
+        "Instagram": ["发布按聚餐人数划分的餐桌与厨房准备轮帖，提供可调整而非固定的采购方案。", "制作东道主礼物选择指南，按烹饪、园艺、阅读和家居兴趣分类。"],
+        "Facebook": ["发起社区感谢故事活动，同时提供不公开他人姓名和照片的参与方式。", "分别发布加拿大与美国感恩节内容，并说明配送、营业和节后活动安排。"],
+        "Pinterest": ["制作秋季餐桌、配色与收纳画板，将{product}链接到具体布置步骤。", "设计东道主礼物与手写感谢卡搭配信息图，提供不同关系的文字示例。"]
+      },
+      "ads": {
+        "theme": "为团聚做好准备并向具体的人表达感谢",
+        "creative": "以备餐、布置、递交小礼物和餐后收纳四个片段呈现{product}的真实用途。",
+        "copy": "把感谢说具体，把团聚准备妥当；探索适合{holiday}的{product}与礼物灵感。",
+        "audience": "面向{country}关注家庭聚餐、厨房家居、秋季装饰和礼赠的用户，加拿大与美国素材及页面分开配置。",
+        "promotion": "可提供真实有效的聚餐套装、礼盒或贺卡服务，不将感恩节家庭情感与强制消费绑定。",
+        "landing": "进入对应国家的感恩节专题页，按备餐、餐桌、东道主礼物和家居场景筛选。"
+      },
+      "seo": ["Thanksgiving {product} ideas", "Thanksgiving host gift guide", "Thanksgiving table essentials", "Thanksgiving kitchen checklist", "Thoughtful family gifts", "Thanksgiving ideas in {country}"]
+    },
+    "black-friday": {
+      "scene": "黑色星期五集中比价、计划采购与年末礼赠的消费场景",
+      "motivation": "消费者希望快速识别真实优惠、产品差异和库存状态，在计划内完成自用或年末礼物采购。",
+      "directions": [
+        {"name": "促销", "description": "以可验证的活动价、优惠条件和历史页面信息为准，不虚构原价、库存紧张或倒计时。"},
+        {"name": "产品展示", "description": "用一致维度的对比表和实演解释{product}差异，帮助用户避免只因折扣买错型号或尺码。"},
+        {"name": "礼品推荐", "description": "按年末收礼对象与用途提供清单，将礼盒、配送和退换条件与商品同时展示。"},
+        {"name": "场景营销", "description": "将自用升级、家庭采购和节日备货分流，依据浏览意图展示对应商品而非全品类堆叠。"}
+      ],
+      "social": {
+        "TikTok": ["制作“折扣之外先核对三项信息”短片，演示{product}规格、适用场景和售后条件。", "用同需求不同型号的实测对比回答购买问题，明确每款适合与不适合的人。"],
+        "Instagram": ["发布按自用、家庭与送礼分类的优惠轮帖，每页列明活动条件和产品选择依据。", "用故事问答收集型号、尺码与兼容性疑问，活动期集中发布可核实答案。"],
+        "Facebook": ["置顶真实活动规则、配送和退换说明，设置统一问题汇总减少重复错误信息。", "为老用户提供清单管理内容，鼓励先查看已有收藏再决定是否参与优惠。"],
+        "Pinterest": ["制作年末礼物采购画板，按对象、兴趣和价格带整理{product}而非只标折扣。", "设计高客单商品购买检查图，汇总参数、保修、配送和退换四类信息。"]
+      },
+      "ads": {
+        "theme": "真实优惠与清晰选购依据并行",
+        "creative": "在展示经确认的活动信息前，先用实演、规格对比和使用场景说明{product}是否适合。",
+        "copy": "优惠要清楚，选择也要合适；查看{holiday}期间{product}的真实活动与选购指南。",
+        "audience": "面向{country}已访问产品、加入清单或表现出品类购买意图的用户，按自用与礼赠需求拆分素材。",
+        "promotion": "仅使用实际生效的折扣、套装或会员权益，完整呈现门槛、期限、库存和排除商品，不统一承诺折扣力度。",
+        "landing": "进入活动规则透明的黑五专题页，提供场景筛选、产品对比、库存和配送退换信息。"
+      },
+      "seo": ["Black Friday {product} deals", "Black Friday gift guide", "Black Friday {category} comparison", "Black Friday shopping checklist", "Holiday gifts on Black Friday", "Black Friday deals in {country}"]
+    },
+    "cyber-monday": {
+      "scene": "网络星期一线上返场、数字产品选购与便捷配送消费场景",
+      "motivation": "消费者希望在线快速完成遗漏采购，比较数字或实体产品差异，并确认线上优惠和履约条件。",
+      "directions": [
+        {"name": "促销", "description": "突出真实线上专享、订阅或返场权益，清楚说明是否与其他活动相同以及适用条件。"},
+        {"name": "产品展示", "description": "以在线演示、兼容性、尺寸指南和常见问题弥补无法线下体验的限制。"},
+        {"name": "场景营销", "description": "针对移动端快速购买、桌面端参数比较和数字交付分别优化内容路径。"},
+        {"name": "礼品推荐", "description": "为错过前期活动的用户提供按对象筛选的{product}，数字礼品不暗示可替代所有实体礼物。"}
+      ],
+      "social": {
+        "TikTok": ["拍摄线上选购从筛选到订单核对的过程，重点演示{product}兼容、尺寸和交付选项。", "用六十秒回答三个线上购买疑问，通过屏幕录制展示真实页面而非口头承诺。"],
+        "Instagram": ["发布线上专享与常规商品差异轮帖，明确价格、内容、交付和售后条件。", "通过故事问答帮助用户判断数字版、实体版或套装哪种更符合需求。"],
+        "Facebook": ["设置网络星期一线上服务答疑帖，集中回复账户、订阅、配送与退换问题。", "向前期收藏用户提供返场清单，并提醒先核对产品适用性再使用优惠。"],
+        "Pinterest": ["制作线上礼物与数字礼品画板，按收礼对象、交付方式和使用设备分类。", "设计移动端下单检查信息图，包含尺寸、兼容、账户和售后四项核对。"]
+      },
+      "ads": {
+        "theme": "线上便捷购买与透明数字交付",
+        "creative": "用屏幕操作和产品实演结合展示筛选、参数核对、交付及售后步骤，突出{product}关键细节。",
+        "copy": "在线比较清楚再下单，查看{holiday}期间{product}的线上权益与交付说明。",
+        "audience": "面向{country}访问过线上商店、收藏产品或关注数字与订阅内容的用户，按设备和购买意向匹配页面。",
+        "promotion": "只展示真实有效的线上优惠、订阅权益或套装，明示自动续费、账户、地域与交付限制。",
+        "landing": "进入移动友好的网一专题页，支持线上筛选、参数比较、数字交付和售后规则查询。"
+      },
+      "seo": ["Cyber Monday {product} deals", "Cyber Monday online gift ideas", "Digital gifts for {holiday_en}", "Online {category} buying guide", "Cyber Monday subscription offers", "Cyber Monday deals in {country}"]
+    },
+    "christmas": {
+      "scene": "圣诞节家庭礼赠、节日布置、聚餐与临近节点应急选购场景",
+      "motivation": "消费者希望为亲友准备有心意且按时可用的礼物，同时完成家居布置、聚餐和节日传统安排。",
+      "directions": [
+        {"name": "礼品推荐", "description": "按家人、朋友、儿童、东道主和兴趣组织{product}，提供实体、定制与数字礼品的真实交付区别。"},
+        {"name": "情感", "description": "围绕陪伴、传统与共同记忆讲述礼物故事，尊重不过圣诞节或采用不同庆祝方式的人群。"},
+        {"name": "产品展示", "description": "展示包装、尺寸、适用年龄、材质和实际使用，避免只用节日视觉掩盖产品信息不足。"},
+        {"name": "场景营销", "description": "将提前选礼、家庭布置、平安夜聚餐和临近节点数字交付分开，不承诺未经核实的到货时间。"}
+      ],
+      "social": {
+        "TikTok": ["拍摄按收礼对象完成一桌礼物的包装过程，逐一说明{product}与对方兴趣的关联。", "发布临近节日的真实选购路径，区分可交付现货与数字礼品，不承诺未核实的到货日期。"],
+        "Instagram": ["发布家庭、朋友、儿童和东道主四组选礼轮帖，每组包含预算之外的兴趣与使用依据。", "用故事展示一项家庭传统的准备过程，产品自然出现并附完整细节链接。"],
+        "Facebook": ["创建社区礼物互助问答，集中解答年龄、尺码、兼容性和交付方式问题。", "分别更新各市场营业、配送和客服信息，让临近节点用户获得可核实的服务说明。"],
+        "Pinterest": ["制作按收礼对象划分的圣诞礼物画板，为每件{product}添加兴趣、年龄或场景标签。", "设计圣诞餐桌、家居装饰和礼物包装画板，提供可保存的步骤及材料清单。"]
+      },
+      "ads": {
+        "theme": "按对象与兴趣完成圣诞礼赠和团聚准备",
+        "creative": "以选礼、包装、布置和团聚使用为叙事线，穿插{product}细节以及真实交付方式说明。",
+        "copy": "把心意与TA的兴趣放在一起，为{holiday}挑选合适的{product}并提前确认交付方式。",
+        "audience": "面向{country}关注节日礼赠、家庭布置、儿童礼品或相关品类的用户，按提前采购与临近需求区分内容。",
+        "promotion": "可展示真实有效的礼盒、包装、定制或数字交付权益，所有配送和定制条件须以可履行信息为准。",
+        "landing": "进入按对象、兴趣和交付方式筛选的圣诞专题页，并提供装饰、聚餐及产品服务说明。"
+      },
+      "seo": ["Christmas {product} gifts", "Christmas gift ideas by recipient", "Personalized Christmas gifts", "Christmas Eve gift guide", "Christmas home and table ideas", "Christmas gifts in {country}"]
+    },
+    "religious": {
+      "scene": "宗教文化节点中的纪念、团聚、礼赠与社区活动场景",
+      "motivation": "不同用户可能重视信仰纪念、地方传统或家庭团聚，品牌需先理解节点含义再决定是否参与商业传播。",
+      "directions": [
+        {"name": "情感", "description": "以准确、克制且尊重信仰差异的表达为主，不挪用神圣符号制造噱头或促销焦虑。"},
+        {"name": "场景营销", "description": "先按国家、地区和社区核对习俗与营业安排，再选择与家庭、鲜花或社区生活相关的内容。"},
+        {"name": "产品展示", "description": "仅当{product}与节点传统有真实关联时展示用途，避免把普通商品包装成宗教必需品。"},
+        {"name": "礼品推荐", "description": "对确有礼赠传统的节点提供适量选择，并说明不同地区的习俗差异与非强制参与原则。"}
+      ],
+      "social": {
+        "TikTok": ["制作简短准确的节点文化介绍，引用可靠资料并由熟悉当地传统的人员审核内容。", "若产品确与家庭传统相关，用平静的准备过程展示{product}，避免娱乐化宗教仪式。"],
+        "Instagram": ["发布区分信仰纪念与地方民俗的轮帖，说明不同国家或地区并不采用同一庆祝方式。", "分享经授权的社区故事与家庭传统，商业商品链接与纪念内容明确分开。"],
+        "Facebook": ["提供当地服务、营业和社区活动信息，邀请熟悉传统的用户纠正不准确表述。", "建立宗教内容审核清单，确保文案不假设所有粉丝具有相同信仰。"],
+        "Pinterest": ["创建以家庭聚餐、鲜花或春季传统为主题的画板，仅收录与当地习俗真实相关的{product}。", "设计地方习俗差异信息图，避免使用不明来源的宗教图像和符号。"]
+      },
+      "ads": {
+        "theme": "尊重信仰与地方传统的克制节点沟通",
+        "creative": "采用家庭准备、社区生活或产品真实用途画面，宗教符号仅在语境准确且获得授权时使用。",
+        "copy": "尊重每一种纪念方式，了解{holiday}的地方传统与相关{product}用途。",
+        "audience": "仅面向{country}具有明确地域或相关内容关联的用户，不依据敏感信仰属性进行推断定向。",
+        "promotion": "不默认促销；确有商业活动时须与纪念内容分开，并保持价格、服务和参与条件透明。",
+        "landing": "进入先介绍节点背景再提供相关商品或服务的专题页，按地区展示准确说明。"
+      },
+      "seo": ["{holiday_en} traditions in {country}", "{holiday_en} family ideas", "Respectful {holiday_en} gift guide", "{holiday_en} community information", "Traditional {holiday_en} {product}", "{holiday_en} customs explained"]
+    },
+    "public": {
+      "scene": "公共假日的休息、出行、家庭聚会与本地服务消费场景",
+      "motivation": "消费者可能安排短途出行、家庭活动或集中购物，也需要准确的营业、物流与地方假日信息。",
+      "directions": [
+        {"name": "场景营销", "description": "先识别假日在目标国家的实际意义，再按居家、出行、聚会或购物选择相应内容。"},
+        {"name": "产品展示", "description": "围绕真实假期用途展示{product}，例如户外装备、家庭聚餐或家居焕新，不做全节日套用。"},
+        {"name": "促销", "description": "仅在零售传统与产品均相关时安排活动，同时尊重纪念型假日，不把休息日自动等同于折扣日。"},
+        {"name": "情感", "description": "对国庆、劳动节和纪念日采用符合当地语境的表达，避免笼统爱国口号或历史误读。"}
+      ],
+      "social": {
+        "TikTok": ["制作假日的一天场景短片，根据节点属性选择家庭、户外或居家内容，而非统一促销口播。", "用清单形式说明假日前的产品准备与服务安排，并提醒核对当地营业信息。"],
+        "Instagram": ["发布按居家、出行和聚会划分的假日轮帖，仅将与{product}真实相关的场景加入链接。", "用故事卡片介绍目标市场的假日背景和当地安排，避免跨国家复制文案。"],
+        "Facebook": ["更新{country}门店、客服和配送安排，为用户提供可核实的假期服务信息。", "围绕本地社区活动发起讨论，对纪念型假日关闭不当促销互动。"],
+        "Pinterest": ["创建与节点属性一致的假期准备画板，涵盖聚餐、户外或家居整理的真实步骤。", "设计出行或家庭活动检查图，将{product}嵌入必要物品而非泛化推荐。"]
+      },
+      "ads": {
+        "theme": "按当地假日意义安排休息与服务",
+        "creative": "以符合节点属性的家庭、户外或居家实景展示{product}，并清晰呈现当地服务信息。",
+        "copy": "为{holiday}的真实计划做好准备，查看{country}相关{product}与服务说明。",
+        "audience": "仅面向{country}适用该假日且对相应场景或品类有兴趣的用户，按地域与意图细分。",
+        "promotion": "纪念属性强的节点不默认折扣；其他活动须说明真实价格、期限和当地履约条件。",
+        "landing": "进入对应国家的假日专题页，先展示场景和服务信息，再提供相关产品入口。"
+      },
+      "seo": ["{holiday_en} {product} ideas", "{holiday_en} plans in {country}", "{holiday_en} family checklist", "{holiday_en} shopping guide", "Things to prepare for {holiday_en}", "{holiday_en} local service information"]
+    },
+    "cultural": {
+      "scene": "文化节日的传统体验、社区联结、创意表达与相关礼赠场景",
+      "motivation": "用户希望了解文化背景、参与庆祝或寻找有创意的内容与产品，同时期待品牌表达真实尊重。",
+      "directions": [
+        {"name": "情感", "description": "以真实文化背景和经授权的人物故事为核心，不挪用身份、历史或传统作为表面装饰。"},
+        {"name": "场景营销", "description": "根据具体节点选择聚会、阅读、穿搭、友谊或社区活动场景，不将所有文化节日娱乐化。"},
+        {"name": "产品展示", "description": "仅展示与节日传统、颜色、活动或创意表达存在明确联系的{product}，并解释关联依据。"},
+        {"name": "礼品推荐", "description": "对友谊、家庭与毕业季等确有礼赠需求的节点按对象和兴趣推荐，纪念月则优先教育内容。"}
+      ],
+      "social": {
+        "TikTok": ["邀请熟悉节点文化的创作者讲解一种真实习俗或创意方式，品牌产品仅在相关环节出现。", "围绕具体传统制作轻量互动视频，并附资料来源，避免恶搞历史与身份。"],
+        "Instagram": ["发布文化背景、人物故事和活动灵感轮帖，明确资料来源及创作者授权。", "按真实场景整理{product}搭配或礼物指南，避免用刻板符号代替文化理解。"],
+        "Facebook": ["分享本地社区活动和可靠教育资源，为有长期合作的项目披露实际行动。", "创建文化主题讨论时设置尊重规则，不鼓励用户公开敏感身份或私人经历。"],
+        "Pinterest": ["创建与节点传统相符的穿搭、餐桌、阅读或手工画板，并标注灵感来源。", "设计友谊、家庭或毕业礼赠清单，把{product}与具体兴趣而非身份标签关联。"]
+      },
+      "ads": {
+        "theme": "以真实文化理解连接庆祝与创意",
+        "creative": "由熟悉文化语境的人员参与制作，采用真实活动、工艺或生活场景，避免刻板视觉和未经核实的历史陈述。",
+        "copy": "从真实传统与个人兴趣出发，探索{holiday}的内容灵感与相关{product}。",
+        "audience": "面向{country}对具体活动、创作者或品类内容有兴趣的用户，不根据族裔或其他敏感身份推断定向。",
+        "promotion": "不默认折扣；若有创作者合作、公益联名或节日套装，须清楚披露商业关系与执行条件。",
+        "landing": "进入文化背景与商品推荐分区明确的专题页，提供创作者信息、资料来源和场景筛选。"
+      },
+      "seo": ["{holiday_en} traditions and ideas", "{holiday_en} {product} inspiration", "{holiday_en} gifts by interest", "{holiday_en} activities in {country}", "{holiday_en} creator stories", "Respectful {holiday_en} celebration guide"]
+    },
+    "commercial": {
+      "scene": "商业购物节点的优惠比较、品牌发现与计划性采购场景",
+      "motivation": "消费者希望找到透明优惠和适合自己的产品，独立品牌节点还会关注产品来源与社区价值。",
+      "directions": [
+        {"name": "促销", "description": "按具体购物节点选择会员、线上、小企业或节后优惠机制，所有价格和条件真实可验证。"},
+        {"name": "产品展示", "description": "用参数、来源、工艺和场景对比支持决策，避免只放大折扣标签而缺少商品信息。"},
+        {"name": "场景营销", "description": "按自用、补货、礼赠和支持本地品牌组织页面，让{product}进入明确需求路径。"},
+        {"name": "情感", "description": "小企业与独立品牌节点可讲创始人、工匠和社区故事，但不将品牌故事包装成虚假公益。"}
+      ],
+      "social": {
+        "TikTok": ["制作购物节点选购短片，先解释{product}适合谁，再展示经确认的活动机制。", "对独立品牌拍摄制作流程或包装现场，以真实人物和工艺替代空泛促销口号。"],
+        "Instagram": ["发布按需求分类的商品与优惠轮帖，清楚列出活动条件和产品选择依据。", "用故事介绍创始人、工匠或产品来源，并明确商业合作与品牌自有信息。"],
+        "Facebook": ["建立购物节服务答疑与规则置顶帖，集中维护价格、库存、配送和退换说明。", "小企业节点邀请本地社区分享真实店铺故事，不要求用户发布订单或个人凭证。"],
+        "Pinterest": ["创建按自用、补货和送礼划分的采购画板，保留产品细节链接与清单功能。", "设计独立品牌礼物或理性购物检查图，将来源、材质、售后与优惠同时呈现。"]
+      },
+      "ads": {
+        "theme": "透明优惠与真实产品价值共同驱动选择",
+        "creative": "以产品实演和来源故事为主画面，活动信息仅使用已确认内容并标明适用条件。",
+        "copy": "先了解{product}为何适合，再查看{holiday}的真实活动与服务条件。",
+        "audience": "面向{country}有明确品类、礼赠、独立品牌或线上采购意图的用户，按购物节点分别建立人群。",
+        "promotion": "依据实际活动选择折扣、套装、会员或本地权益，不设置统一力度，不虚构原价和库存。",
+        "landing": "进入对应商业节点专题页，提供透明规则、产品比较、品牌来源及履约售后信息。"
+      },
+      "seo": ["{holiday_en} {product} offers", "{holiday_en} shopping guide", "{holiday_en} gift ideas", "Independent brand {product}", "{holiday_en} deals in {country}", "How to choose {product} during sales"]
+    },
+    "seasonal": {
+      "scene": "换季上新、天气适配、库存整理与阶段性生活准备场景",
+      "motivation": "消费者希望根据气温、活动和生活阶段更新用品，商家也需要以真实库存和需求组织内容。",
+      "directions": [
+        {"name": "场景营销", "description": "按当地天气、旅行、返校、毕业或居家焕新组织{product}，建议窗口不宣传为统一官方日期。"},
+        {"name": "产品展示", "description": "展示面料、功能、尺寸和季节适用边界，用真实天气或空间条件说明选择理由。"},
+        {"name": "促销", "description": "区分上新、常规销售和库存清理，季末内容如实呈现尺码与库存，不制造虚假紧迫感。"},
+        {"name": "礼品推荐", "description": "毕业和季节礼赠按新阶段需求选择实用产品，不因清仓标签降低质量与售后说明。"}
+      ],
+      "social": {
+        "TikTok": ["拍摄同一{product}在两种天气或生活阶段中的使用差异，明确适用条件和搭配方式。", "用一周真实场景记录换季整理，展示保留、补充与收纳而非鼓励全部换新。"],
+        "Instagram": ["发布按气温、空间或活动划分的换季轮帖，附产品材质、尺码和护理信息。", "通过故事征集当地天气与实际需求，再整理不含精确预测的区域化建议。"],
+        "Facebook": ["创建换季准备与旧物处理讨论，鼓励维修、转赠和理性补充所需用品。", "按目标市场发布建议窗口与库存服务说明，避免称为统一官方促销日期。"],
+        "Pinterest": ["制作春夏秋冬分类的产品与搭配画板，为{product}标注天气和使用场景。", "设计换季衣柜、旅行或宿舍清单信息图，区分已有、可修和需要补充的物品。"]
+      },
+      "ads": {
+        "theme": "按真实天气和生活阶段理性焕新",
+        "creative": "通过当地场景、产品细节和前后对比展示{product}的适用条件，不清仓商品与新品明确区分。",
+        "copy": "根据真实需要更新装备，查看{holiday}建议窗口内的{product}与选购指南。",
+        "audience": "面向{country}有相应季节、旅行、返校、毕业或家居兴趣的用户，并结合实际地域和页面行为分组。",
+        "promotion": "按真实库存选择上新权益、套装或清仓优惠，明确尺码、条件与售后，不宣称窗口为官方统一活动。",
+        "landing": "进入按天气、活动和产品状态筛选的季节专题页，提供库存、护理和配送退换信息。"
+      },
+      "seo": ["{holiday_en} {product} guide", "Seasonal {category} essentials", "{holiday_en} checklist in {country}", "How to choose seasonal {product}", "Seasonal gift and refresh ideas", "Weather ready {product} guide"]
+    },
+    "industry": {
+      "scene": "体育、宠物、食品与社交话题等行业节点的兴趣消费场景",
+      "motivation": "消费者围绕特定兴趣参与观赛、养宠、烘焙或创意互动，只愿意关注与主题真正相关的产品和内容。",
+      "directions": [
+        {"name": "场景营销", "description": "先确认节点对应的行业与受众，再设计观赛、养宠、烘焙或社交创作场景，避免跨行业硬蹭热点。"},
+        {"name": "产品展示", "description": "以实际操作、参数或宠物舒适度等真实证据展示{product}，说明它与主题的直接关联。"},
+        {"name": "情感", "description": "围绕兴趣社群、陪伴和共同参与创作内容，涉及动物福利时避免将动物作为博眼球道具。"},
+        {"name": "促销", "description": "仅对高度相关商品提供真实组合或活动权益，低关联品类优先内容参与而非折扣投放。"}
+      ],
+      "social": {
+        "TikTok": ["围绕具体行业主题制作教程或挑战，例如观赛布置、养宠知识或烘焙步骤，并自然演示{product}。", "邀请垂直创作者回答一个真实兴趣问题，明确合作身份，不使用未授权赛事或活动标识。"],
+        "Instagram": ["发布行业主题清单轮帖，把产品功能与观赛、宠物照护或创作步骤逐项对应。", "用故事开展兴趣投票和问答，将结果转化为下一期实用内容而非立即促销。"],
+        "Facebook": ["建立垂直兴趣讨论帖，由具备经验的人员维护专业、友善且可核实的信息。", "若组织领养、公益或社区活动，清楚披露合作方和参与条件，不以互动量替代实际帮助。"],
+        "Pinterest": ["创建观赛、宠物、烘焙或创意主题画板，收录可执行步骤和真正相关的{product}。", "设计行业购买检查图，例如影音参数、宠物尺寸或烘焙工具材质与清洁方式。"]
+      },
+      "ads": {
+        "theme": "围绕明确兴趣提供实用内容与相关产品",
+        "creative": "由垂直场景和真实操作构成素材，展示{product}与行业主题的直接关系，不使用未授权官方标识。",
+        "copy": "为{holiday}的兴趣计划准备合适装备，查看{product}在真实场景中的用法。",
+        "audience": "面向{country}对具体体育、宠物、食品或创意主题有明确兴趣的用户，不使用宽泛人群强推低关联商品。",
+        "promotion": "仅对真实相关产品提供有效套装或权益，涉及公益合作须说明机制，不使用未经授权的官方背书。",
+        "landing": "进入按行业兴趣与使用场景组织的专题页，提供教程、参数、注意事项和相关商品。"
+      },
+      "seo": ["{holiday_en} {product} guide", "{holiday_en} activity checklist", "{category} essentials for {holiday_en}", "{holiday_en} ideas in {country}", "How to choose {product} for {holiday_en}", "{holiday_en} community inspiration"]
+    },
+    "awareness": {
+      "scene": "公益主题节点的科普、社区行动与负责任品牌参与场景",
+      "motivation": "用户希望获得可靠信息、参与真实行动或支持相关社区，而不是看到议题被简化成促销标签。",
+      "directions": [
+        {"name": "情感", "description": "以尊严、知情同意和真实经历为前提，避免污名化、恐吓式叙事或要求受益者公开隐私。"},
+        {"name": "场景营销", "description": "优先科普、社区服务与长期行动，仅当{product}与议题有直接且可核实的关联时进入商业内容。"},
+        {"name": "产品展示", "description": "环保、健康或公益联名只展示可验证属性和明确机制，不作未经证实的医疗、环保或捐赠宣称。"},
+        {"name": "促销", "description": "不默认促销；如有捐赠或公益联名，披露金额或比例、受益方、期限、上限和查询方式。"}
+      ],
+      "social": {
+        "TikTok": ["依据当年官方主题制作一条科普短片，引用可靠来源并由具备相关知识的人员审核。", "记录一项可验证的品牌行动过程，说明目标、限制和后续更新，不用受益群体形象博取情绪。"],
+        "Instagram": ["发布权威资料摘要与行动清单轮帖，清楚区分事实、品牌立场和商业信息。", "若展示环保或健康相关{product}，逐项说明证据、适用边界和不可推导的效果。"],
+        "Facebook": ["分享专业机构资源与社区活动，邀请用户以志愿服务或学习等低门槛方式参与。", "发布公益合作进展和完整机制，提供问题反馈渠道并按承诺更新结果。"],
+        "Pinterest": ["创建科普、可重复使用生活方式或社区行动画板，链接权威资料而非仅链接商品。", "设计负责任选购检查图，帮助用户核实材质、认证、捐赠条款与产品真实用途。"]
+      },
+      "ads": {
+        "theme": "以可靠信息和真实行动参与公益议题",
+        "creative": "以科普信息、行动过程或可验证产品属性为主，不使用患者、弱势群体或敏感身份的推断画像。",
+        "copy": "了解{holiday}的可靠信息与实际行动，并核实相关{product}的真实属性和参与方式。",
+        "audience": "面向{country}主动关注相关公开内容或品类信息的用户，不基于健康、身份等敏感属性定向。",
+        "promotion": "不默认折扣；涉及捐赠或公益联名时完整披露机制、期限与限制，商业转化不得掩盖公益信息。",
+        "landing": "进入先提供权威资料和实际行动、再呈现相关产品或合作的专题页，附清晰证据与更新说明。"
+      },
+      "seo": ["{holiday_en} official information", "{holiday_en} action ideas", "Responsible {product} guide", "{holiday_en} community activities", "How to verify charity partnerships", "{holiday_en} resources in {country}"]
+    }
+  }
+}
