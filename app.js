@@ -118,6 +118,7 @@ const PLAN_STATUSES = [
   { value: "not_started", label: "未开始" },
   { value: "preparing", label: "准备中" },
   { value: "ongoing", label: "进行中" },
+  { value: "review", label: "待复盘" },
   { value: "done", label: "已完成" },
   { value: "abandoned", label: "已放弃" }
 ];
@@ -203,7 +204,7 @@ function cacheDom() {
     "match-results-title", "match-summary", "match-year", "match-list", "match-empty",
     "match-empty-detail", "strategy-backdrop", "strategy-drawer", "strategy-close",
     "strategy-title", "strategy-subtitle", "strategy-body",
-    "plan-new-button", "stat-plan-count", "stat-plan-active", "stat-plan-done",
+    "plan-new-button", "stat-plan-count", "stat-plan-active", "stat-plan-review", "stat-plan-done",
     "task-progress-fill", "stat-task-percent", "stat-task-detail",
     "plan-filter-bar", "plan-filter-options", "plan-list", "plan-empty", "plan-empty-new",
     "plan-backdrop", "plan-drawer", "plan-drawer-close", "plan-drawer-eyebrow",
@@ -1006,6 +1007,7 @@ function openDetails(id, trigger) {
   dom.drawerTitle.textContent = event.name_cn;
   dom.drawerNameEn.textContent = event.name_en;
   dom.drawerBody.innerHTML = `
+    ${buildDetailCountdown(event)}
     <section class="drawer-section drawer-overview" aria-labelledby="drawer-basic-title">
       <h3 id="drawer-basic-title">基础信息</h3>
       <dl class="drawer-facts">
@@ -1154,15 +1156,48 @@ function handleMatchSubmit(event) {
   dom.matchResults.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+const MATCH_TIERS = {
+  A: {
+    label: "重点营销节点",
+    className: "tier-a",
+    note: "产品属性与节日消费场景高度匹配，优先准备内容、广告和营销活动。"
+  },
+  B: {
+    label: "可选营销节点",
+    className: "tier-b",
+    note: "存在一定关联，但不是核心营销机会，可结合产品特点、预算和运营能力决定是否参与。"
+  },
+  C: {
+    label: "不建议优先参与",
+    className: "tier-c",
+    note: "产品关联度较弱，不建议为了参与节日而盲目投入广告预算。"
+  }
+};
+const MATCH_TIER_RANK = { A: 0, B: 1, C: 2 };
+
 function generateRecommendations(input) {
   return state.events.map(event => scoreEventForProduct(event, input))
     .filter(recommendation => recommendation && recommendation.score >= 34)
-    .sort((a, b) => b.score - a.score || compareByPriority(a.event, b.event))
+    .map(recommendation => ({ ...recommendation, tier: getMatchTier(recommendation) }))
+    .sort((a, b) =>
+      MATCH_TIER_RANK[a.tier] - MATCH_TIER_RANK[b.tier]
+      || b.score - a.score
+      || compareByPriority(a.event, b.event))
     .slice(0, 12)
     .map(recommendation => ({
       ...recommendation,
       reason: buildRecommendationReason(recommendation, input)
     }));
+}
+
+// 分级依据：实际匹配得分 + 命中的匹配依据数量，不按推荐顺序简单分组
+function getMatchTier(recommendation) {
+  const { score, direct, preferred, universal, featureSpecific } = recommendation;
+  const evidenceCount = [direct, preferred, universal, featureSpecific].filter(Boolean).length;
+  const coreMatched = direct || preferred;
+  if (score >= 75 && evidenceCount >= 2 && coreMatched) return "A";
+  if (score >= 50 && (coreMatched || featureSpecific)) return "B";
+  return "C";
 }
 
 function scoreEventForProduct(event, input) {
@@ -1259,11 +1294,24 @@ function renderMatchResults() {
   const input = state.matchInput;
   if (!input) return;
   const count = state.recommendations.length;
+  const groups = ["A", "B", "C"]
+    .map(tier => ({ tier, items: state.recommendations.filter(item => item.tier === tier) }))
+    .filter(group => group.items.length);
   const product = input.productName || getProductLabel(input.category);
   dom.matchResults.hidden = false;
-  dom.matchSummary.textContent = `${product} · ${input.countries.map(getCountryShortLabel).join("、")}：精选 ${count} 个高相关节点，按产品属性、消费场景、国家适用性和节日优先级综合排序。`;
+  dom.matchSummary.textContent = `${product} · ${input.countries.map(getCountryShortLabel).join("、")}：共 ${count} 个相关节点，按匹配得分与命中依据分为重点营销节点、可选营销节点、不建议优先参与三级，而非按推荐顺序简单分组。`;
   dom.matchYear.textContent = `${state.year} 年规划`;
-  dom.matchList.innerHTML = state.recommendations.map(renderMatchCard).join("");
+  dom.matchList.innerHTML = groups.map(group => `
+    <section class="match-tier-group ${MATCH_TIERS[group.tier].className}">
+      <header class="match-tier-head">
+        <span class="match-tier-badge">${group.tier}</span>
+        <div class="match-tier-copy">
+          <h4>${MATCH_TIERS[group.tier].label}<small>${group.items.length} 个节点</small></h4>
+          <p>${MATCH_TIERS[group.tier].note}</p>
+        </div>
+      </header>
+      <div class="match-tier-grid">${group.items.map(renderMatchCard).join("")}</div>
+    </section>`).join("");
   dom.matchList.hidden = count === 0;
   dom.matchEmpty.hidden = count !== 0;
 }
@@ -1429,7 +1477,7 @@ function openStrategy(id, trigger) {
       <p class="strategy-note">关键词仅作为英文内容选题建议，不包含虚构的搜索量、排名或竞争程度数据。</p>
     </section>
     <div class="strategy-footer-action">
-      <p>第四轮将提供营销计划管理，本轮仅预留接入接口。</p>
+      <p>你可以将此营销机会加入个人营销计划，自动生成节日营销准备任务。</p>
       <button type="button" data-plan-event="${escapeHTML(event.id)}">加入我的营销计划</button>
     </div>`;
 
@@ -1466,7 +1514,6 @@ function addToMarketingPlan(eventId) {
     date: event.start ? `${event.start.getFullYear()}-${String(event.start.getMonth() + 1).padStart(2, "0")}-${String(event.start.getDate()).padStart(2, "0")}` : null
   };
   document.dispatchEvent(new CustomEvent("marketing-plan:add", { detail: payload }));
-  showToast("营销计划为第四轮功能，本轮已预留接入接口");
   return payload;
 }
 
@@ -1567,6 +1614,60 @@ function getCountdownInfo(startDate, endDate) {
   return { phase: "最后转化", phaseLabel: "最后转化", className: "phase-7", days: daysUntil, text: `${daysUntil} 天后开始`, short: `D+${daysUntil}` };
 }
 
+// 节日详情中的倒计时与阶段建议（复用上方倒计时计算，不重复实现）
+function getCountdownAdvice(phaseLabel) {
+  const advice = {
+    "提前规划": "距活动 60 天以上：确认主推产品、供应链与利润空间，并安排素材和内容排期。",
+    "准备阶段": "距活动 30–60 天：完成素材拍摄、商品详情页与节日落地页，锁定促销机制。",
+    "内容预热": "距活动 14–30 天：发布社媒预热内容、准备广告素材与 SEO 文章，开始积累再营销人群。",
+    "营销冲刺": "距活动 7–14 天：广告开始放量，检查转化追踪、库存与物流时效。",
+    "最后转化": "距活动不到 7 天：发布最后购买提醒，确认物流截止日期并监控广告表现。",
+    "进行中": "活动正在进行：集中承接流量，监控广告表现与履约时效。",
+    "已结束": "活动已结束：在营销计划中记录销售额、广告花费、利润和素材表现，完成复盘后再标记为已完成。"
+  };
+  return advice[phaseLabel] || "";
+}
+
+function buildDetailCountdown(event) {
+  if (!event.start) {
+    return `
+      <section class="drawer-section detail-countdown is-pending" aria-labelledby="drawer-countdown-title">
+        <div class="detail-countdown-head">
+          <div>
+            <p class="countdown-eyebrow">节日倒计时</p>
+            <h3 id="drawer-countdown-title">日期待官方公布</h3>
+          </div>
+          <span class="countdown-phase phase-pending">待定</span>
+        </div>
+        <p class="countdown-advice">官方尚未公布该节点的当年日期，因此不展示推测倒计时。待官方公布后，倒计时与阶段建议会自动计算。</p>
+      </section>`;
+  }
+
+  const cd = getCountdownInfo(event.start, event.end);
+  const isOngoing = cd.phase === "ongoing";
+  const isDone = cd.phase === "done";
+  const number = isDone ? Math.abs(cd.days) : cd.days;
+  const numberLabel = isDone ? "距活动结束（天）" : isOngoing ? "活动剩余（天）" : "距活动开始（天）";
+  const headline = isDone ? "活动已结束" : isOngoing ? "活动进行中" : "距离活动还有";
+  const advice = getCountdownAdvice(cd.phaseLabel);
+
+  return `
+    <section class="drawer-section detail-countdown ${cd.className}" aria-labelledby="drawer-countdown-title">
+      <div class="detail-countdown-head">
+        <div>
+          <p class="countdown-eyebrow">节日倒计时</p>
+          <h3 id="drawer-countdown-title">${headline}</h3>
+        </div>
+        <span class="countdown-phase ${cd.className}">${escapeHTML(cd.phaseLabel)}</span>
+      </div>
+      <div class="countdown-number">
+        <strong>${number}</strong>
+        <span>${numberLabel}</span>
+      </div>
+      <p class="countdown-advice"><strong>当前阶段建议：</strong>${escapeHTML(advice)}</p>
+    </section>`;
+}
+
 // ============ LocalStorage ============
 function loadPlansFromStorage() {
   try {
@@ -1604,7 +1705,7 @@ function updateAutoPlanStatuses() {
     const nowMid = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
     let newStatus = plan.status;
-    if (nowMid > endMid) newStatus = "done";
+    if (nowMid > endMid) newStatus = "review";
     else if (nowMid >= startMid) newStatus = "ongoing";
     else {
       const daysBefore = Math.floor((startMid - nowMid) / DAY_MS);
@@ -1632,6 +1733,7 @@ function renderPlanStats() {
   const plans = state.plans;
   dom.statPlanCount.textContent = plans.length;
   dom.statPlanActive.textContent = plans.filter(p => p.status === "ongoing").length;
+  dom.statPlanReview.textContent = plans.filter(p => p.status === "review").length;
   dom.statPlanDone.textContent = plans.filter(p => p.status === "done").length;
 
   const allTasks = state.tasks;
@@ -1757,6 +1859,31 @@ function renderPlanForm(plan, prefill) {
           <input id="pf-end" type="date" value="${escapeHTML(data.endDate || "")}" required>
         </div>
       </div>
+      ${isEdit ? `
+      <div class="plan-review-block">
+        <div class="plan-review-head">
+          <h3>活动复盘</h3>
+          <p>完成销售额、广告花费、利润和素材复盘后，才可把计划标记为「已完成」。</p>
+        </div>
+        <div class="plan-review-grid">
+          <div class="form-field">
+            <label>销售额（USD）</label>
+            <input id="pf-review-sales" type="number" min="0" step="0.01" value="${escapeHTML(String(data.reviewSales ?? ""))}" placeholder="例如：12800">
+          </div>
+          <div class="form-field">
+            <label>广告花费（USD）</label>
+            <input id="pf-review-adspend" type="number" min="0" step="0.01" value="${escapeHTML(String(data.reviewAdSpend ?? ""))}" placeholder="例如：2600">
+          </div>
+          <div class="form-field">
+            <label>实际利润（USD）</label>
+            <input id="pf-review-profit" type="number" step="0.01" value="${escapeHTML(String(data.reviewProfit ?? ""))}" placeholder="例如：4050">
+          </div>
+          <div class="form-field">
+            <label>素材复盘</label>
+            <input id="pf-review-creative" type="text" value="${escapeHTML(String(data.reviewCreative ?? ""))}" placeholder="例如：短视频素材转化最好">
+          </div>
+        </div>
+      </div>` : ""}
       <div class="plan-save-row">
         <div class="plan-form-extra">
           ${isEdit ? `<button type="button" class="plan-del-confirm" id="plan-form-delete">🗑 删除此计划</button>` : ""}
@@ -1805,6 +1932,13 @@ function savePlanFromForm(event) {
     notes: document.getElementById("pf-notes").value.trim()
   };
 
+  // 复盘数据仅在编辑模式渲染，新建计划时保持空值，保证与旧数据兼容
+  [["reviewSales", "pf-review-sales"], ["reviewAdSpend", "pf-review-adspend"],
+   ["reviewProfit", "pf-review-profit"], ["reviewCreative", "pf-review-creative"]].forEach(([key, id]) => {
+    const field = document.getElementById(id);
+    if (field) data[key] = field.value.trim();
+  });
+
   if (state.editingPlanId) {
     const plan = state.plans.find(p => p.id === state.editingPlanId);
     if (plan) {
@@ -1816,6 +1950,10 @@ function savePlanFromForm(event) {
     const newPlan = {
       id: uid(),
       ...data,
+      reviewSales: "",
+      reviewAdSpend: "",
+      reviewProfit: "",
+      reviewCreative: "",
       status: "not_started",
       createdAt: new Date().toISOString()
     };
@@ -2083,10 +2221,21 @@ function renderPlanCard(plan) {
     </article>`;
 }
 
+// 完成销售数据、广告花费、利润和素材复盘后，才允许标记为已完成
+function isReviewComplete(plan) {
+  return ["reviewSales", "reviewAdSpend", "reviewProfit", "reviewCreative"]
+    .every(key => String(plan[key] ?? "").trim() !== "");
+}
+
 function updatePlanStatus(plan, newStatus) {
+  if (newStatus === "done" && !isReviewComplete(plan)) {
+    showToast("请先打开计划详情，在「活动复盘」中填写销售额、广告花费、利润和素材复盘，再标记为已完成");
+    return false;
+  }
   plan.status = newStatus;
   savePlansToStorage();
   showToast(`状态已更新为 ${PLAN_STATUSES.find(s => s.value === newStatus)?.label || newStatus}`);
+  return true;
 }
 
 function deletePlan(planId) {
@@ -2110,7 +2259,7 @@ function handlePlanAddFromMatch(event) {
     holidayName: holiday.name_cn,
     productName: payload.product?.productName || "",
     countries: countryLabels,
-    start, end,
+    startDate: start, endDate: end,
     goal: "", promotion: "", discountRate: "",
     platforms: DEFAULT_PLATFORMS.join(", "),
     notes: `由推荐自动创建 · ${holiday.name_en}`
@@ -2216,7 +2365,11 @@ function validatePlan(item) {
     discountRate: Number.isFinite(discountRate) ? discountRate : null,
     platforms: String(item.platforms || ""),
     notes: String(item.notes || ""),
-    status: ["not_started", "preparing", "ongoing", "done", "abandoned"].includes(item.status) ? item.status : "not_started",
+    reviewSales: String(item.reviewSales ?? ""),
+    reviewAdSpend: String(item.reviewAdSpend ?? ""),
+    reviewProfit: String(item.reviewProfit ?? ""),
+    reviewCreative: String(item.reviewCreative ?? ""),
+    status: ["not_started", "preparing", "ongoing", "review", "done", "abandoned"].includes(item.status) ? item.status : "not_started",
     createdAt: item.createdAt || new Date().toISOString()
   };
 }
